@@ -43,13 +43,39 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/'
+    },
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          // global: true,
+          // required: true,
+          type: false
+        },
+        user: {
+          property: 'user'
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          user: { url: '/api/user', method: 'get' }
+        }
+      }
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://fridgyapp.herokuapp.com/'
-    // baseURL:'http://localhost:5501/'
+    // baseURL: 'https://fridgyapp.herokuapp.com/'
+    baseURL: 'http://localhost:5501/'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

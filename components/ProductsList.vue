@@ -51,6 +51,7 @@ export default {
   props: {
     products: Array,
   },
+
   data: () => ({
     items: [
       {
@@ -169,7 +170,7 @@ export default {
     addProducts() {
       this.products.forEach((product) => {
         this.items.forEach((categ) => {
-          if (categ.uid === product.category)
+          if (categ.title === product.category)
             categ.items = [...categ.items, product]
         })
       })

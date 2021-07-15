@@ -7,13 +7,12 @@
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-list>
-      <v-list-item v-for="(item, i) in shoppingList" :key="i">
+      <v-list-item>
         <v-list-item-content>
-          <v-list-item-title v-text="item.product.name"></v-list-item-title>
+          <v-list-item-title ></v-list-item-title>
           <v-form>
-            <v-text-field v-model="ownProduct" label="Solo" solo></v-text-field>
+            <v-text-field label="Solo" solo></v-text-field>
             <v-btn
-              @click="updateList(item)"
               class="mx-2"
               fab
               dark
@@ -31,24 +30,19 @@
 
 <script>
 export default {
-  data() {
-    return {
-      ownProduct: '',
-    }
-  },
   props: {
-    list: [],
+    list: Array,
   },
-  computed: {
-    shoppingList() {
-      return this.list[0].products.filter((buy) => !buy.bought)
-    },
-  },
-  methods: {
-    async updateList(item) {
-      const listUpdate = await this.$axios.$put('/api/shoppingList/changeStatus', { id: item._id })
-      this.$emit('isbuy',listUpdate)
-    },
-  },
+  // computed: {
+  //   shoppingList() {
+  //     return this.list[0].products.filter((buy) => !buy.bought)
+  //   },
+  // },
+  // methods: {
+  //   async updateList(item) {
+  //     const listUpdate = await this.$axios.$put('/api/shoppingList/changeStatus', { id: item._id })
+  //     this.$emit('isbuy',listUpdate)
+  //   },
+  // },
 }
 </script>

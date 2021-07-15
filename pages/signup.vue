@@ -2,7 +2,6 @@
 <v-container>
   <v-form  class="post-it" ref="form" v-model="valid" lazy-validation>
     <v-text-field
-      v-model="username"
       label="Username"
       required
     ></v-text-field>
