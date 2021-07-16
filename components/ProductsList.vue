@@ -176,7 +176,7 @@ export default {
       })
     },
     addProduct(product) {
-      this.$emit('moveShopping', product)
+      this.$emit('moveShopping', product._id)
     },
   },
 }

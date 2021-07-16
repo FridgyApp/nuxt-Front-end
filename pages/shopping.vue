@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row no-gutters>
       <v-col cols="5" offset="-3" class="mt=3">
-        <ProductsList :products = products /> 
+        <ProductsList @moveShopping="addList" :products = products /> 
         <v-container>
           <v-card class="d-flex flex-column justify-center">
             <v-text-field label="Products" outlined clearable></v-text-field>
@@ -18,7 +18,7 @@
         class="d-flex flex-column justify-center"
         cols="4"
       >
-      <ShoppingList />
+      <ShoppingList @erase = deleteItem :list="list" />
       </v-col>
     </v-row>
   </v-container>
@@ -33,6 +33,8 @@ export default {
 
     return { products, list }
   },
+
+
   // async asyncData({ $axios }) {
   //   const [listProduct, shoppingList] = await Promise.all([
   //     $axios.$get('/api/products'),
@@ -51,16 +53,17 @@ export default {
   //   this.product = this.apiProduct
   //   this.list = this.apiShopping
   // },
-  // methods: {
-  //   async addList(product) {
-  //     this.list = await this.$axios.$post('/api/shoppingList/addProduct', {
-  //       productId: product._id,
-  //     })
-  //   },
-  //   changeList(items) {
-  //     this.list = [items]
-  //   },
-  // },
+  methods: {
+    async addList(product) {
+      this.list= await this.$axios.$post('/api/shoppinglist', {
+        productId: product,
+      })
+    },
+    async deleteItem(id) {
+      const hola= await this.$axios.$delete(`/api/shoppingList/${id}`)
+      console.log(hola)
+    },
+  },
 }
 </script>
 
