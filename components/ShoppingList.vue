@@ -13,12 +13,12 @@
           <v-form>
             <v-text-field label="Solo" solo></v-text-field>
             <v-btn
-              @click="deleteProduct(item)"
               class="mx-2"
               fab
               dark
               small
               color="primary"
+              @click="deleteProduct(item)"
             >
               <v-icon dark> mdi-minus </v-icon>
             </v-btn>

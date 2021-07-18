@@ -16,7 +16,7 @@
         <v-list>
           <v-list-group
             v-for="item in listProduct"
-            :key="item.title"
+            :key="item.uid"
             v-model="item.active"
             :prepend-icon="item.action"
             no-action
@@ -32,8 +32,8 @@
 
             <v-list-item
               v-for="child in item.items"
-              @click="addProduct(child)"
               :key="child.name"
+              @click="addProduct(child)"
             >
               <v-list-item-content>
                 <v-list-item-title v-text="child.name"></v-list-item-title>
@@ -170,8 +170,10 @@ export default {
     addProducts() {
       this.products.forEach((product) => {
         this.items.forEach((categ) => {
-          if (categ.title === product.category)
+
+          if (categ.title === product.category){
             categ.items = [...categ.items, product]
+          }
         })
       })
     },

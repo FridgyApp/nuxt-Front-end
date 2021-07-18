@@ -1,36 +1,13 @@
 <template>
-  <v-app class="fond">
-    <v-main >
-      <v-container class="hola">
-        <Nuxt />
-      </v-container>
-    <v-footer
-    class="footer"
-    color="grey darken-4"
-    padless
-  >
-    <v-row
-      justify="center"
-      no-gutters
-    >
-      <v-btn
-        v-for="link in links"
-        :key="link"
-        color="white"
-        text
-        rounded
-        class="my-2"
-      >
-        {{ link }}
-      </v-btn>
-      <v-col
-        class="grey darken-4 py-4 text-center white--text"
-        cols="12"
-      >
-        {{ new Date().getFullYear() }} — <strong>Fridgy.App</strong>
-      </v-col>
-    </v-row>
-  </v-footer>
+  <v-app>
+    <v-main class="bg-color">
+      <div class="container-grid">
+        <div class="bg-img"></div>
+        <div class="form-auth">
+          <h1>Formulario</h1>
+          <Nuxt />
+        </div>
+      </div>
     </v-main>
   </v-app>
 </template>
@@ -39,33 +16,50 @@
 export default {
   data() {
     return {
-      links: [
-        'Home',
-        'About Us',
-        'Contact Us',
-      ]
+      links: ['Home', 'About Us', 'Contact Us'],
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
-
-.fond{
-  background-image: url('@/static/FridgeWallpaper.jpg');
-  background-repeat: no-repeat;
-  background-size:cover;
+.container-grid {
+  display: grid;
+  grid-template-columns: 100%;
+  height: 100%;
 }
-.hola{
+
+.bg-img{
+  display:none;
+}
+
+@media (min-width: 700px) {
+  .container-grid {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    height: 100%;
+  }
+  .bg-img {
+    display: block;
+    background-image: url('@/static/FridgeWallpaper.jpg');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+  }
+}
+.bg-color {
+  background-image: radial-gradient(
+    circle at 85.04% -10.69%,
+    #fff5d2 0,
+    #f2deb5 50%,
+    #e0c799 100%
+  );
+}
+
+.form-auth {
   display: flex;
-  justify-content: center;  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.footer{
-  position: fixed;
-  bottom:0;
-  width: 100%;
-
-  
-}
-
 </style>

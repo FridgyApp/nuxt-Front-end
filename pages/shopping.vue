@@ -18,7 +18,7 @@
         class="d-flex flex-column justify-center"
         cols="4"
       >
-      <ShoppingList @erase = deleteItem :list="list" />
+      <ShoppingList :list="list" @erase = deleteItem />
       </v-col>
     </v-row>
   </v-container>
@@ -33,26 +33,6 @@ export default {
 
     return { products, list }
   },
-
-
-  // async asyncData({ $axios }) {
-  //   const [listProduct, shoppingList] = await Promise.all([
-  //     $axios.$get('/api/products'),
-  //     $axios.$get('/api/shoppingList'),
-  //   ])
-  //   return { apiProduct: listProduct, apiShopping: shoppingList }
-  // },
-  // data() {
-  //   return {
-  //     list: [],
-  //     product: [],
-  //     nameProduct: '',
-  //   }
-  // },
-  // mounted() {
-  //   this.product = this.apiProduct
-  //   this.list = this.apiShopping
-  // },
   methods: {
     async addList(product) {
       this.list= await this.$axios.$post('/api/shoppinglist', {
@@ -60,9 +40,11 @@ export default {
       })
     },
     async deleteItem(id) {
-      const hola= await this.$axios.$delete(`/api/shoppingList/${id}`)
-      console.log(hola)
+      this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
     },
+    newProductList(){
+
+    }
   },
 }
 </script>

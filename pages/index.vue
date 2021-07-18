@@ -12,18 +12,19 @@
       </blockquote>
     </v-col>
     <v-btn depressed color="primary" @click="createGroup"> Primary </v-btn>
+    <Modals />
   </v-row>
 </template>
 <script>
 export default {
   middleware: 'auth',
-  methods:{
-    async createGroup(){
-      const group = await this.$axios.$post('/api/group',{
-        name:'Adrian Prueba'
+  methods: {
+    async createGroup() {
+      const group = await this.$axios.$post('/api/group', {
+        name: 'Adrian Prueba',
       })
       console.log(group)
-    }
-  }
+    },
+  },
 }
 </script>
