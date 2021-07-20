@@ -1,5 +1,5 @@
 <template>
-  <v-card width="500" class="mx-auto" max-width="500" max-height="600">
+  <v-card class="mx-auto" max-width="500" max-height="600">
     <v-toolbar color="#1E88FF" dark>
       <v-spacer></v-spacer>
       <v-toolbar-title><b>SHOPPING LIST</b></v-toolbar-title>
@@ -41,8 +41,6 @@ export default {
   },
   methods: {
     deleteProduct(item) {
-      console.log(item)
-      // const listUpdate = await this.$axios.$put('/api/shoppingList/changeStatus', { id: item._id })
       this.$emit('erase',item.productId._id)
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div class="overflow-hidden">
-      <v-app-bar color="grey darken-4" dark>
+      <v-app-bar color="grey darken-4" dark app>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title>My Home</v-toolbar-title>
 
@@ -24,38 +24,26 @@
         </v-btn>
       </v-app-bar>
     </div>
-    <v-main >
-      <v-container>
-        <Nuxt />
-      </v-container>
+    <v-main>
+      <Nuxt />
     </v-main>
-      <v-footer
-    class="footer"
-    color="grey darken-4"
-    padless
-  >
-    <v-row
-      justify="center"
-      no-gutters
-    >
-      <v-btn
-        v-for="link in links"
-        :key="link"
-        color="white"
-        text
-        rounded
-        class="my-2"
-      >
-        {{ link }}
-      </v-btn>
-      <v-col
-        class="grey darken-4 py-4 text-center white--text"
-        cols="12"
-      >
-        {{ new Date().getFullYear() }} — <strong>Fridgy.App</strong>
-      </v-col>
-    </v-row>
-  </v-footer>
+    <v-footer class="footer" color="grey darken-4" padless app>
+      <v-row justify="center" no-gutters>
+        <v-btn
+          v-for="link in links"
+          :key="link"
+          color="white"
+          text
+          rounded
+          class="my-2"
+        >
+          {{ link }}
+        </v-btn>
+        <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
+          {{ new Date().getFullYear() }} — <strong>Fridgy.App</strong>
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
@@ -66,7 +54,7 @@ export default {
       items: [
         {
           icon: 'mdi-calendar-month',
-          title: 'Calendar',
+          title: 'Home',
           to: '/',
         },
         {
@@ -76,15 +64,11 @@ export default {
         },
         {
           icon: 'mdi-note-outline',
-          title: 'Post-Notes',
+          title: 'Calendar',
           to: '/inspire',
         },
       ],
-      links: [
-        'Home',
-        'About Us',
-        'Contact Us',
-      ],
+      links: ['Home', 'About Us', 'Contact Us'],
       title: 'Vuetify.js',
     }
   },
@@ -95,10 +79,9 @@ export default {
 .white {
   color: #fff;
 }
-.footer{
+.footer {
   position: fixed;
-  bottom:0;
+  bottom: 0;
   width: 100%;
-
 }
 </style>

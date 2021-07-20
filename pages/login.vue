@@ -32,6 +32,7 @@
               Log In
             </v-btn>
             <v-btn
+              to="/signup"
               block
               plain
             >

@@ -22,6 +22,17 @@
       <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
         Sign Up
       </v-btn>
+      <v-btn
+        to="/login"
+        plain
+        :disabled="!valid"
+        color="success"
+        class="my-1"
+        block
+        @click="validate"
+      >
+        Log In
+      </v-btn>
     </v-form>
   </v-container>
 </template>
@@ -46,12 +57,8 @@ export default {
 
   methods: {
     async validate() {
-      this.$refs.form.validate()
-      if (
-        this.password !== '' &&
-        this.email !== '' &&
-        this.password === this.passwordRepeat
-      ) {
+      const validate = this.$refs.form.validate()
+      if (validate && this.password === this.passwordRepeat) {
         try {
           await this.$axios.$post(`/api/auth/signup`, {
             email: this.email,

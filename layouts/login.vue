@@ -12,17 +12,16 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      links: ['Home', 'About Us', 'Contact Us'],
-    }
-  },
-}
-</script>
-
 <style scoped>
+
+.bg-color {
+  background-image: radial-gradient(
+    circle at 85.04% -10.69%,
+    #fff5d2 0,
+    #f2deb5 50%,
+    #e0c799 100%
+  );
+}
 .container-grid {
   display: grid;
   grid-template-columns: 100%;
@@ -47,14 +46,7 @@ export default {
     background-size: cover;
   }
 }
-.bg-color {
-  background-image: radial-gradient(
-    circle at 85.04% -10.69%,
-    #fff5d2 0,
-    #f2deb5 50%,
-    #e0c799 100%
-  );
-}
+
 
 .form-auth {
   display: flex;

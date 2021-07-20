@@ -6,7 +6,7 @@
         <v-container>
           <v-card class="d-flex flex-column justify-center">
             <v-text-field label="Products" outlined clearable></v-text-field>
-            <v-btn x-large color="#1E88FF" dark depressed>
+            <v-btn x-large color="success" dark depressed>
               Add New Product
             </v-btn>
           </v-card>
