@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     deleteProduct(item) {
+      
       this.$emit('erase',item.productId._id)
     },
   },

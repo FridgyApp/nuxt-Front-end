@@ -24,14 +24,21 @@ export default {
   middleware: 'auth',
   methods: {
     async createGroup(name) {
-      const vista = await this.$axios.$post('api/group',
-        {name,members:[]},
-        {headers:{
-          token : this.$auth.$storage.setUniversal('userId') 
-        }})
-      console.log(vista)
+      try {
+        await this.$axios.$post(
+          'api/group',
+          { name, members: [] },
+          {
+            headers: {
+              token: this.$auth.$storage.setUniversal('userId'),
+            },
+          }
+        )
+      } catch (error) {
+        console.log('algo paso')
+      }
+      
     },
-
   },
 }
 </script>

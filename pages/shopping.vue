@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row no-gutters>
       <v-col cols="5" offset="-3" class="mt=3">
-        <ProductsList @moveShopping="addList" :products = products /> 
+        <ProductsList :products = products @moveShopping="addList"  /> 
         <v-container>
           <v-card class="d-flex flex-column justify-center">
             <v-text-field label="Products" outlined clearable></v-text-field>
@@ -29,8 +29,9 @@
 export default {
   middleware: 'auth',
   async asyncData({ $axios }) {
-    const [ products, list ]  = await Promise.all([$axios.$get('/api/products/60f045e39c653dce2e52837e'), $axios.$get('/api/shoppingList/')]) 
-
+    const user = localStorage.getItem('userLogin')
+    const [ products, list ]  = await Promise.all([$axios.$get(`/api/products/${user.group}`), $axios.$get('/api/shoppingList/')]) 
+    console.log(list)
     return { products, list }
   },
   methods: {
@@ -38,6 +39,7 @@ export default {
       this.list= await this.$axios.$post('/api/shoppinglist', {
         productId: product,
       })
+      console.log(this.list)
     },
     async deleteItem(id) {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
