@@ -65,7 +65,7 @@ export default {
         {
           icon: 'mdi-note-outline',
           title: 'Calendar',
-          to: '/inspire',
+          to: '/calendar',
         },
       ],
       links: ['Home', 'About Us', 'Contact Us'],
