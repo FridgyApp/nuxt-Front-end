@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <div class="overflow-hidden">
-      <v-app-bar color="grey darken-4" dark app>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-toolbar-title>My Home</v-toolbar-title>
+      <v-app-bar color="grey darken-4" dark>
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+        <v-toolbar-title>Home</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn
@@ -22,23 +22,60 @@
           <v-icon>mdi-cog-outline</v-icon>
           Settings
         </v-btn>
+        <v-btn @click="logoutSesion" elevation="2" color="transparent">
+          <v-icon>mdi-cog-outline</v-icon>
+          Logout
+        </v-btn>
       </v-app-bar>
+      <v-navigation-drawer v-model="drawer" absolute temporary>
+        <v-list nav dense>
+          <v-list-item-group v-model="group" active-class="amber lighten-2">
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-home</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list-item
+              v-for="(item, i) in items"
+              :key="i"
+              :to="item.to"
+              exact
+              elevation="2"
+              color="transparent"
+            >
+              <v-list-item-icon>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-cog-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Settings</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-cog-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
     </div>
     <v-main>
       <Nuxt />
     </v-main>
     <v-footer class="footer" color="grey darken-4" padless app>
       <v-row justify="center" no-gutters>
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          color="white"
-          text
-          rounded
-          class="my-2"
-        >
-          {{ link }}
-        </v-btn>
         <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} — <strong>Fridgy.App</strong>
         </v-col>
@@ -49,8 +86,14 @@
 
 <script>
 export default {
+  asyncData({$auth}){
+    console.log($auth.user)
+    return {nameGroup: $auth.nameGroup}
+  },
   data() {
     return {
+      drawer: false,
+      group: null,
       items: [
         {
           icon: 'mdi-calendar-month',
@@ -68,8 +111,11 @@ export default {
           to: '/inspire',
         },
       ],
-      links: ['Home', 'About Us', 'Contact Us'],
-      title: 'Vuetify.js',
+    }
+  },
+  methods: {
+    async logoutSesion() {
+      await this.$auth.logout()
     }
   },
 }

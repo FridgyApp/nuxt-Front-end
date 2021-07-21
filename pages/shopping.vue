@@ -28,10 +28,8 @@
 <script>
 export default {
   middleware: 'auth',
-  async asyncData({ $axios }) {
-    const user = localStorage.getItem('userLogin')
-    const [ products, list ]  = await Promise.all([$axios.$get(`/api/products/${user.group}`), $axios.$get('/api/shoppingList/')]) 
-    console.log(list)
+  async asyncData({ $axios, $auth }) {
+    const [ products, list ]  = await Promise.all([$axios.$get(`/api/products/${$auth.user.group}`), $axios.$get('/api/shoppingList/')]) 
     return { products, list }
   },
   methods: {
@@ -39,7 +37,6 @@ export default {
       this.list= await this.$axios.$post('/api/shoppinglist', {
         productId: product,
       })
-      console.log(this.list)
     },
     async deleteItem(id) {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)

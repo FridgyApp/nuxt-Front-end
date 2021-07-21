@@ -65,6 +65,7 @@
         addGroup() {
             this.$emit('addGroup', this.name)
             this.dialog = false
+            this.name = ''
         }
     },
   }
