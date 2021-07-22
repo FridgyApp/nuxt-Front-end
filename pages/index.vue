@@ -12,7 +12,17 @@
       <v-container fluid>
         <v-row>
           <v-col cols="3" class="primary">
-            <StickyNote :notes="notes" ></StickyNote>
+            <v-container>
+              <v-row>
+                <v-col v-for="note in notes" :key="note._id" cols="6">
+                  <StickyNote
+                    :note="note"
+                    @delete="deleteNote"
+                    @edit="editNote"
+                  ></StickyNote>
+                </v-col>
+              </v-row>
+            </v-container>
           </v-col>
           <v-col cols="6" class="success"> </v-col>
           <v-col cols="3" class="accent">
@@ -26,13 +36,11 @@
 <script>
 export default {
   middleware: 'auth',
-  async asyncData({ $auth, $axios }) {
-    const config = {
-      headers: {
-        token: $auth.$storage._state['_token.local'],
-      },
-    }
-    const [list, notes ] = await Promise.all([ $axios.$get(`/api/shoppingList/`, { config }),  $axios.$get(`/api/stickynotes/`, { config })])
+  async asyncData({ $axios }) {
+    const [list, notes] = await Promise.all([
+      $axios.$get(`/api/shoppingList/`),
+      $axios.$get(`/api/stickynotes/`),
+    ])
     return { list, notes }
   },
   methods: {
@@ -40,12 +48,7 @@ export default {
       try {
         await this.$axios.$post(
           'api/group',
-          { name, members: [] },
-          {
-            headers: {
-              token: this.$auth.user,
-            },
-          }
+          { name, members: [] }
         )
       } catch (error) {
         console.log('algo paso')
@@ -54,13 +57,20 @@ export default {
     async deleteItem(id) {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
     },
-    async addPostIt(note){
-      const config = {
-        headers: {
-          token: this.$auth.$storage._state['_token.local'],
-      },
-    }
-      const newNote = await  this.$axios.$post(`/api/stickynotes`, note, config)
+    async deleteNote(id) {
+      this.notes = await this.$axios.$delete(
+        `/api/stickynotes/${id}`,
+        {}
+      )
+    },
+    async editNote(note) {
+      this.notes = await this.$axios.$put(
+        `/api/stickynotes/${note._id}`,
+        {note}
+      )
+    },
+    async addPostIt(note) {
+      const newNote = await this.$axios.$post(`/api/stickynotes`, note)
       this.notes.push(newNote)
     },
   },

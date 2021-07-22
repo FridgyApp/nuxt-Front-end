@@ -87,7 +87,7 @@
 <script>
 export default {
   asyncData({$auth}){
-    console.log($auth.user)
+    console.log($auth.$storage)
     return {nameGroup: $auth.nameGroup}
   },
   data() {
@@ -121,7 +121,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .white {
   color: #fff;
 }
