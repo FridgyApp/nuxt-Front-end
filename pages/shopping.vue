@@ -1,24 +1,32 @@
 <template>
-  <v-container fluid>
+  <v-container >
     <v-row no-gutters>
-      <v-col cols="5" offset="-3" class="mt=3">
-        <ProductsList :products = products @moveShopping="addList"  /> 
+      <v-col 
+        cols="5"
+        class="mt-3">
         <v-container>
-          <v-card class="d-flex flex-column justify-center">
+         <ProductsList :products = products @moveShopping="addList"  /> 
+        </v-container>
+        <v-container>
+          <v-card
+           class="d-flex flex-column justify-center" 
+           width="auto"
+           max-width="600"
+           overflow-visible
+           >
             <v-text-field label="Products" outlined clearable></v-text-field>
-            <v-btn x-large color="success" dark depressed>
+            <v-btn x-large color="#ffba01" light depressed>
               Add New Product
             </v-btn>
           </v-card>
-        </v-container>
-        <v-spacer></v-spacer>
+        </v-container>    
       </v-col>
       <v-col
-        offset="2"
-        class="d-flex flex-column justify-center"
-        cols="4"
-      >
+        cols="5"
+        class="mt-3">
+      <v-container>
       <ShoppingList :list="list" @erase = deleteItem />
+      </v-container>
       </v-col>
     </v-row>
   </v-container>
@@ -54,7 +62,7 @@ export default {
 }
 .title {
   font-family: 'Raleway', sans-serif !important;
-  color: #0066da;
+  color: #FFBA01;
 }
 ::-webkit-scrollbar {
   display: none;

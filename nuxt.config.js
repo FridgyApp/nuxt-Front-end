@@ -75,7 +75,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'https://fridgyapp.herokuapp.com/'
-    baseURL: 'http://localhost:5501/'
+    baseURL: 'http://localhost:5500/'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -85,13 +85,16 @@ export default {
       // dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: '#FFBA01',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
+        },
+        light: {
+          primary: '#FFBA01'
         }
       }
     }

@@ -20,7 +20,7 @@
             ></v-text-field>
             <v-btn
               :disabled="!valid"
-              color="success"
+              color="#FFBA01"
               class="my-1"
               block
               @click="validate"
@@ -71,7 +71,7 @@ export default {
 <style scoped>
 .form-login {
   padding: 2rem;
-  background-color: transparent;
+  background-color: #666;
 }
 .post-it {
   width: 60%;

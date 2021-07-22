@@ -3,11 +3,11 @@
     <v-row no-gutters>
       <v-card
         class="mx-auto scroll"
-        max-width="500"
+        width=auto
         max-height="600"
         overflow-visible
       >
-        <v-app-bar color="#1E88FF" dark class="app_bar">
+        <v-app-bar color="#333" dark class="app_bar">
           <v-spacer></v-spacer>
           <v-toolbar-title><b>PRODUCTS</b></v-toolbar-title>
           <v-spacer></v-spacer>
@@ -175,7 +175,7 @@ export default {
 }
 .title {
   font-family: 'Raleway', sans-serif !important;
-  color: #0066da;
+  color: #333;
 }
 ::-webkit-scrollbar {
   display: none;

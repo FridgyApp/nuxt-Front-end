@@ -11,11 +11,11 @@
     <v-row>
       <v-container fluid>
         <v-row>
-          <v-col cols="3" class="primary">
+          <v-col cols="3" class="stickyNote-bg">
             <StickyNote :notes="notes" ></StickyNote>
           </v-col>
-          <v-col cols="6" class="success"> </v-col>
-          <v-col cols="3" class="accent">
+          <v-col cols="6" class="calendar-bg"> </v-col>
+          <v-col cols="3" class="shoppingList-bg">
             <ShoppingList @erase="deleteItem" :list="list" />
           </v-col>
         </v-row>
@@ -66,3 +66,22 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.stickyNote-bg {
+  display: grid;
+  background-color: white;
+  width: 100%;
+  min-height: 700px;
+}
+
+.calendar-bg {
+  display: grid;
+  background-color: #ffba01;
+}
+
+.shoppingList-bg {
+  display: grid;
+  background-color: white;
+}
+</style>

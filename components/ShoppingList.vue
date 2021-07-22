@@ -1,6 +1,13 @@
 <template>
-  <v-card class="mx-auto" max-width="500" max-height="600">
-    <v-toolbar color="#1E88FF" dark>
+  <v-card 
+    class="mx-auto"
+    width="auto" 
+    max-width="600" 
+    max-height="600"
+    min-width="400"
+    min-height="600"
+    overflow-visible>
+    <v-toolbar color="#333" dark>
       <v-spacer></v-spacer>
       <v-toolbar-title><b>SHOPPING LIST</b></v-toolbar-title>
 

@@ -4,7 +4,7 @@
       <div class="container-grid">
         <div class="bg-img"></div>
         <div class="form-auth">
-          <h1>Formulario</h1>
+          
           <Nuxt />
         </div>
       </div>
@@ -15,12 +15,8 @@
 <style scoped>
 
 .bg-color {
-  background-image: radial-gradient(
-    circle at 85.04% -10.69%,
-    #fff5d2 0,
-    #f2deb5 50%,
-    #e0c799 100%
-  );
+  background-color: #333;
+  background-size: cover;
 }
 .container-grid {
   display: grid;

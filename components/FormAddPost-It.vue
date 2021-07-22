@@ -1,7 +1,10 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template #activator="{ on, attrs }">
-      <v-btn class="mx-2" color="primary" dark v-bind="attrs" v-on="on">
+      <v-btn 
+        class="home-buttons mx-2" 
+        color="#333" 
+        dark v-bind="attrs" v-on="on">
         Add PostIt
       </v-btn>
     </template>
@@ -61,3 +64,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.home-buttons {
+  border-radius: 50px;
+}
+</style>

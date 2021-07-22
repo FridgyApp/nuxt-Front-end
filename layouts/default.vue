@@ -1,28 +1,37 @@
 <template>
   <v-app>
     <div class="overflow-hidden">
-      <v-app-bar color="grey darken-4" dark>
+      <v-app-bar class="navBar" dark>
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title>Home</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn
+          class="navBar-Button mx-3" 
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
           exact
           elevation="2"
-          color="transparent"
+          color="#ffba01" light
+        
         >
-          <v-icon>mdi-calendar-month</v-icon>
+          <v-icon>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn elevation="2" color="transparent">
+        <v-btn 
+          class="navBar-Button mx-3"
+          elevation="2" 
+          color="#666">
           <v-icon>mdi-cog-outline</v-icon>
           Settings
         </v-btn>
-        <v-btn @click="logoutSesion" elevation="2" color="transparent">
+        <v-btn 
+          class="navBar-Button mx-3"
+          @click="logoutSesion" 
+          elevation="2" 
+          color="#666">
           <v-icon>mdi-cog-outline</v-icon>
           Logout
         </v-btn>
@@ -71,13 +80,13 @@
         </v-list>
       </v-navigation-drawer>
     </div>
-    <v-main>
+    <v-main class="bg-main">
       <Nuxt />
     </v-main>
     <v-footer class="footer" color="grey darken-4" padless app>
       <v-row justify="center" no-gutters>
         <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Fridgy.App</strong>
+          {{ new Date().getFullYear() }} — <strong>Fridge.App</strong>
         </v-col>
       </v-row>
     </v-footer>
@@ -121,7 +130,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;700&display=swap');
+#app {
+  font-family: 'Dosis', sans-serif;
+}
+.navBar-Button {
+  border-radius: 50px;
+  
+  
+}
+.navBar {
+  background-color: #333
+}  
+.bg-main {
+  background-color: #666;
+  background-size: cover;
+}
+
 .white {
   color: #fff;
 }
