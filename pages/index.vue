@@ -12,7 +12,7 @@
       <v-container fluid>
         <v-row>
           <v-col cols="3" class="primary"></v-col>
-          <v-col cols="6" class="success"> <Calendar/></v-col>
+          <v-col cols="6" class="success"> <Calendar /></v-col>
           <v-col cols="3" class="accent"><ShoppingList /></v-col>
         </v-row>
       </v-container>
