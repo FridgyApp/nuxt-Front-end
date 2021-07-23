@@ -70,6 +70,7 @@ export default {
     },
     editNote() {
       this.$emit('edit', this.newNote)
+      this.dialog = false
     },
     
   },

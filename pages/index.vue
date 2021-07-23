@@ -64,10 +64,14 @@ export default {
       )
     },
     async editNote(note) {
-      this.notes = await this.$axios.$put(
+      const modifiedNote = await this.$axios.$put(
         `/api/stickynotes/${note._id}`,
         {note}
       )
+      this.notes = this.notes.map(note=>{
+        if(note._id === modifiedNote._id) return modifiedNote
+        else return note
+      })
     },
     async addPostIt(note) {
       const newNote = await this.$axios.$post(`/api/stickynotes`, note)
