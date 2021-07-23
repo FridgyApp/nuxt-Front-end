@@ -39,8 +39,8 @@ export default {
         name:"hola",
         color:"red",
         description:"Con Bruno",
-        start: new Date('2021-07-22'),
-        end: new Date('2021-07-23'),
+        start: new Date('2021-07-24T15:12'),
+        end: new Date('2021-07-25T15:12'),
         timed: true
       }
       const event = await this.$axios.$post('/api/events', hola)

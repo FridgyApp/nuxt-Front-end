@@ -24,6 +24,19 @@
                 required
               ></v-text-field>
             </v-col>
+            <v-col cols="12">
+              <v-select
+                :items="items"
+                :menu-props="{ top: true, offsetY: true }"
+                label="Label"
+              ></v-select>
+            </v-col>
+            <v-col cols="6">
+              <input type="datetime-local" v-model="date" id="" />
+            </v-col>
+            <v-col cols="6">
+              <input type="datetime-local" v-model="date" id="" />
+            </v-col>
           </v-row>
         </v-container>
         <small>*indicates required field</small>
@@ -44,7 +57,19 @@ export default {
   data: () => ({
     dialog: false,
     name: '',
-    description: ''
+    description: '',
+    items: [
+      'blue',
+      'indigo',
+      'deep-purple',
+      'cyan',
+      'green',
+      'orange',
+      'grey darken-1',
+    ],
+    start: '',
+    end: '',
+    timed: ''
   }),
   methods: {
     addEvent() {
