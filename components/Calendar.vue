@@ -71,11 +71,8 @@
                 </v-btn>
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn icon>
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
-                <v-btn icon>
-                  <v-icon>mdi-dots-vertical</v-icon>
+                <v-btn icon @click="deleteEvent">
+                  <v-icon>mdi-trash-can-outline</v-icon>
                 </v-btn>
               </v-toolbar>
               <v-card-text>
@@ -123,9 +120,6 @@ export default {
     ],
   }),
   methods: {
-    async addEvent(){
-     
-    },
     viewDay({ date }) {
       this.focus = date
       this.type = 'day'
@@ -158,6 +152,10 @@ export default {
 
       nativeEvent.stopPropagation()
     },
+    deleteEvent(){
+      this.$emit('deleteEvent',this.selectedEvent._id)
+      this.selectedOpen = false
+    }
   },
 }
 </script>

@@ -26,16 +26,18 @@
             </v-col>
             <v-col cols="12">
               <v-select
+                v-model="color"
                 :items="items"
                 :menu-props="{ top: true, offsetY: true }"
                 label="Label"
+
               ></v-select>
             </v-col>
             <v-col cols="6">
-              <input type="datetime-local" v-model="date" id="" />
+              <input v-model="start" type="datetime-local"  />
             </v-col>
             <v-col cols="6">
-              <input type="datetime-local" v-model="date" id="" />
+              <input v-model="end" type="datetime-local"  />
             </v-col>
           </v-row>
         </v-container>
@@ -67,13 +69,20 @@ export default {
       'orange',
       'grey darken-1',
     ],
+    color:'',
     start: '',
     end: '',
-    timed: ''
+    timed: true
   }),
   methods: {
     addEvent() {
-      this.$emit('addEvent')
+      this.$emit('addEvent',{
+        name:this.name,
+        description:this.description,
+        start:this.start,
+        end: this.end,
+        timed: this.timed
+        })
       this.dialog = false
     },
   },
