@@ -24,7 +24,7 @@
               </v-row>
             </v-container>
           </v-col>
-          <v-col cols="6" class="calendar-bg"> </v-col>
+          <v-col cols="6" class="calendar-bg"> <Calendar /> </v-col>
           <v-col cols="3" class="shoppingList-bg">
             <ShoppingList @erase="deleteItem" :list="list" />
           </v-col>
@@ -33,6 +33,7 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
 export default {
   middleware: 'auth',

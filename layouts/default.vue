@@ -117,7 +117,7 @@ export default {
         {
           icon: 'mdi-note-outline',
           title: 'Calendar',
-          to: '/inspire',
+          to: '/calendar',
         },
       ],
     }
