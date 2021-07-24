@@ -1,33 +1,89 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="6" v-for="note in listNotes" :key="note._id">
-        <v-card class="mx-auto mx-4" max-width="200" min-width="200">
-          <v-card-title>{{note.name}}<v-spacer></v-spacer><v-icon>mdi-pencil</v-icon></v-card-title>
-
-          <v-card-text class="text--primary">
-            <div>{{note.description}}</div>
+  <v-card class="mx-auto mx-4" max-width="200">
+    <v-card-title
+      >{{ note.name }}
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <template #activator="{ on, attrs }">
+          <v-icon  v-bind="attrs" v-on="on" 
+            >mdi-square-edit-outline</v-icon
+          >
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">ADD PostIt</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="name"
+                    label="Name*"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="description"
+                    label="Description*"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+            <small>*indicates required field</small>
           </v-card-text>
-
           <v-card-actions>
-            
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Close
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="editNote"> Save </v-btn>
           </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+        </v-card> </v-dialog
+      ><v-icon @click="eraseNote(note._id)"
+        >mdi-trash-can-outline</v-icon
+      ></v-card-title
+    >
+    
+
+    <v-card-text class="text--primary">
+      <div>{{ note.description }}</div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
 export default {
-  name: 'StickyNote',
+  data: () => ({
+    name: '',
+    dialog: false,
+    description: '',
+  }),
   props: {
-    notes: Array,
+    note: Object,
   },
-  computed: {
-    listNotes() {
-      return this.notes
+  methods: {
+    eraseNote(id) {
+      this.$emit('delete', id)
     },
+    editNote() {
+      this.$emit('edit', this.newNote)
+      this.dialog = false
+    },
+    
+  },
+
+  computed: {
+    newNote() {
+      return {
+        _id: this.note._id,
+        name: this.name,
+        description: this.description,
+      }
+    },
+    
   },
 }
 </script>

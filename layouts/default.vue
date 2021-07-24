@@ -96,7 +96,7 @@
 <script>
 export default {
   asyncData({$auth}){
-    console.log($auth.user)
+    console.log($auth.$storage)
     return {nameGroup: $auth.nameGroup}
   },
   data() {
@@ -130,24 +130,7 @@ export default {
 }
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;700&display=swap');
-#app {
-  font-family: 'Dosis', sans-serif;
-}
-.navBar-Button {
-  border-radius: 50px;
-  
-  
-}
-.navBar {
-  background-color: #333
-}  
-.bg-main {
-  background-color: #666;
-  background-size: cover;
-}
-
+<style lang="scss" scoped>
 .white {
   color: #fff;
 }
