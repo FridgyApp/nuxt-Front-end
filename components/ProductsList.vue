@@ -3,7 +3,7 @@
     <v-row no-gutters>
       <v-card
         class="mx-auto scroll"
-        width=auto
+        width="auto"
         max-height="600"
         overflow-visible
       >
@@ -15,17 +15,17 @@
 
         <v-list>
           <v-list-group
-            v-for="item in listProduct"
-            :key="item.title"
+            v-for="(item,key) in listProduct"
+            :key="key"
             v-model="item.active"
             :prepend-icon="item.action"
             no-action
           >
-            <template v-slot:activator>
+            <template #activator>
               <v-list-item-content>
                 <v-list-item-title
-                  v-text="item.title"
                   class="title"
+                  v-text="key"
                 ></v-list-item-title>
               </v-list-item-content>
             </template>
@@ -44,6 +44,7 @@
       </v-card>
     </v-row>
   </v-container>
+
 </template>
 
 <script>
@@ -53,98 +54,83 @@ export default {
   },
 
   data: () => ({
-    items: [
-      {
+    items: {
+      'Fruits & Vegetables': {
         action: 'mdi-fruit-pineapple',
         active: true,
-        items: [],
-        title: 'Fruits & Vegetables',
+        items: {},
       },
-      {
+      'Bread & Cakes': {
         action: 'mdi-baguette',
         active: true,
-        items: [],
-        title: 'Bread & Cakes',
+        items: {},
       },
-      {
+      'Milk & Cheese': {
         action: 'mdi-cheese',
         active: true,
-        items: [],
-        title: 'Milk & Cheese',
+        items: {},
       },
-      {
+      'Fish': {
         action: 'mdi-fish',
         active: true,
-        items: [],
-        title: 'Fish',
+        items: {},
       },
-      {
+      'Meat': {
         action: 'mdi-food-steak',
         active: true,
-        items: [],
-        title: 'Meat',
+        items: {},
       },
-      {
+      'Ingredients & Spices': {
         action: 'mdi-shaker-outline',
         active: true,
-        items: [],
-        title: 'Ingredients & Spices',
+        items: {},
       },
-      {
+      'Frozen & Pre-Cooked Food': {
         action: 'mdi-ice-cream',
         active: true,
-        items: [],
-        title: 'Frozen & Pre-Cooked Food',
+        items: {},
       },
-      {
+      'Cereals & Pasta': {
         action: 'mdi-pasta',
         active: true,
-        items: [],
-        title: 'Cereals & Pasta',
+        items: {},
       },
-      {
+      'Snacks & Sweets': {
         action: 'mdi-cookie',
         active: true,
-        items: [],
-        title: 'Snacks & Sweets',
+        items: {},
       },
-      {
+      'Drinks': {
         action: 'mdi-beer',
         active: true,
-        items: [],
-        title: 'Drinks',
+        items: {},
       },
-      {
+      'Home': {
         action: 'mdi-spray-bottle',
         active: true,
-        items: [],
-        title: 'Home',
+        items: {},
       },
-      {
+      'Cleanliness & Health': {
         action: 'mdi-bottle-tonic-plus',
         active: true,
-        items: [],
-        title: 'Cleanliness & Health',
+        items: {},
       },
-      {
+      'Pet Products': {
         action: 'mdi-paw',
         active: true,
-        items: [],
-        title: 'Pet Products',
+        items: {},
       },
-      {
+      'Garden & Home': {
         action: 'mdi-shovel',
         active: true,
-        items: [],
-        title: 'Garden & Home',
+        items: {},
       },
-      {
+      'Own Products': {
         action: 'mdi-account',
         active: true,
-        items: [],
-        title: 'Own Products',
+        items: {},
       },
-    ],
+    },
   }),
   computed: {
     listProduct() {
@@ -152,16 +138,13 @@ export default {
       return this.items
     },
   },
+
   methods: {
     addProducts() {
-      console.log('hola')
-
-      this.products.forEach((product) => {
-        this.items.forEach((categ) => {
-          if (categ.title === product.category) {
-            categ.items = [...categ.items, product]
-          }
-        })
+      this.products.forEach(product =>{
+        if(!this.items[product.category].items[product._id]){
+          this.items[product.category].items[product._id] = product
+        }
       })
     },
     addProduct(product) {

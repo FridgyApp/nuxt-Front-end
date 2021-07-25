@@ -5,6 +5,7 @@
         <div class="d-flex justify-center align-center py-2">
           <FormAddGroup @addGroup="createGroup" />
           <FormAddPost-It @addPostIt="addPostIt" />
+          <FormAddUserGroup @addUserGroup="addUserGroup" />
         </div>
       </v-col>
     </v-row>
@@ -16,6 +17,7 @@
               <v-row>
                 <v-col v-for="note in notes" :key="note._id" cols="6">
                   <StickyNote
+                    v-if="Array.isArray(notes)"
                     :note="note"
                     @delete="deleteNote"
                     @edit="editNote"
@@ -24,9 +26,13 @@
               </v-row>
             </v-container>
           </v-col>
-          <v-col cols="6" class="calendar-bg"> <Calendar /> </v-col>
+          <v-col cols="6" class="calendar-bg"> <Calendar :types="types"/> </v-col>
           <v-col cols="3" class="shoppingList-bg">
-            <ShoppingList @erase="deleteItem" :list="list" />
+            <ShoppingList
+              v-if="Array.isArray(list)"
+              :list="list"
+              @erase="deleteItem"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -38,19 +44,24 @@
 export default {
   middleware: 'auth',
   async asyncData({ $axios }) {
-    const [list, notes] = await Promise.all([
+    const [list, notes, events] = await Promise.all([
       $axios.$get(`/api/shoppingList/`),
       $axios.$get(`/api/stickynotes/`),
+      $axios.$get(`/api/events`)
     ])
-    return { list, notes }
+    const types = events.map((event) => {
+      return {
+        ...event,
+        start: new Date(event.start).getTime(),
+        end: new Date(event.end).getTime(),
+      }
+    })
+    return { list, notes, types }
   },
   methods: {
     async createGroup(name) {
       try {
-        await this.$axios.$post(
-          'api/group',
-          { name, members: [] }
-        )
+        await this.$axios.$post('api/group', { name, members: [] })
       } catch (error) {
         console.log('algo paso')
       }
@@ -59,24 +70,29 @@ export default {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
     },
     async deleteNote(id) {
-      this.notes = await this.$axios.$delete(
-        `/api/stickynotes/${id}`,
-        {}
-      )
+      this.notes = await this.$axios.$delete(`/api/stickynotes/${id}`, {})
     },
     async editNote(note) {
       const modifiedNote = await this.$axios.$put(
         `/api/stickynotes/${note._id}`,
-        {note}
+        { note }
       )
-      this.notes = this.notes.map(note=>{
-        if(note._id === modifiedNote._id) return modifiedNote
+      this.notes = this.notes.map((note) => {
+        if (note._id === modifiedNote._id) return modifiedNote
         else return note
       })
     },
     async addPostIt(note) {
       const newNote = await this.$axios.$post(`/api/stickynotes`, note)
       this.notes.push(newNote)
+    },
+    async addUserGroup(email) {
+      try {
+        const user = await this.$axios.$put(`/api/group`, { email })
+        console.log(user)
+      } catch (error) {
+        console.log({ error })
+      }
     },
   },
 }
