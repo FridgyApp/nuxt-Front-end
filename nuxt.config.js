@@ -13,7 +13,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'google-signin-client_id', content: '836729938191-qqllvd6r7b2lspkp10kjfau7fa4ea0tb.apps.googleusercontent.com'}
+      
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
