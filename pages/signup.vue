@@ -1,48 +1,61 @@
 <template>
-  <v-container>
+  <div>
     <v-container>
-    <v-row>
-      <v-col class="d-flex justify-center mb-6 container-login">
-        <v-form ref="form" v-model="valid" class="post-it" lazy-validation>
-          <v-card class="form-login" rounded>
-            <v-text-field
+      <v-row>
+        <div class="logo-login mb-5" >
+          <img src="../static/logo-blanco.png">  
+        </div>
+      </v-row>
+    </v-container>    
+    <v-container>
+      <v-row>
+        <v-col class="d-flex justify-center mb-6 container-login">
+          <v-form ref="form" v-model="valid" class="post-it" lazy-validation>
+            <v-card class="form-login" rounded>
+             <v-text-field
+              class="rounded-pill"
               v-model="username" 
               solo
               label="Username" 
               required
-             ></v-text-field>
-            <v-text-field
+               ></v-text-field>
+             <v-text-field
+              class="rounded-pill"
               v-model="email"
               solo
               :rules="emailRules"
               label="E-mail"
               required
-            ></v-text-field>
-            <v-text-field
+              ></v-text-field>
+             <v-text-field
               v-model="password"
+              class="rounded-pill"
               solo
               :rules="passwordRules"
               label="Password"
               required
-            ></v-text-field>
-            <v-text-field
+             ></v-text-field>
+             <v-text-field
               v-model="passwordRepeat"
+              class="rounded-pill"
               solo
               label="Confirm Password"
               required
-            ></v-text-field>
-            <v-btn
+             ></v-text-field>
+              <v-btn
               :disabled="!valid"
               color="#FFBA01"
-              class="my-1"
+              class="rounded-pill my-1"
               block
               @click="validate"
-            >
+             >
               Sign Up
             </v-btn>
             <v-btn
-             to="/signup" 
-             block plain> 
+             to="/login" 
+             block plain
+             color="white"
+             > 
               Exit 
             </v-btn>
           </v-card>
@@ -50,9 +63,14 @@
       </v-col>
     </v-row>
   </v-container>
-    
-      
-  </v-container>
+  <v-footer class="footer" color="grey darken-4" padless app>
+      <v-row justify="center" no-gutters>
+        <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
+          {{ new Date().getFullYear() }} — <strong>Fridge.App</strong>
+        </v-col>
+      </v-row>
+    </v-footer>
+  </div>     
 </template>
 <script>
 export default {
@@ -100,9 +118,7 @@ export default {
 </script>
 
 <style scoped>
-.my-1 {
-  border-radius: 50px;
-}
+
 .form-login {
   padding: 2rem;
   background-color: #666;

@@ -1,8 +1,9 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template #activator="{ on, attrs }">
-      <v-btn class="mx-2" color="primary" dark v-bind="attrs" v-on="on">
-        Add Group
+      <v-btn class="mx-2" color="#333" dark v-bind="attrs" v-on="on">
+        <v-icon>mdi-plus</v-icon>
+        Add Event
       </v-btn>
     </template>
     <v-card>

@@ -1,9 +1,6 @@
 <template>
-  <v-container>
+  <v-container >
     <v-row>
-      <v-col cols="10">
-        <Calendar @deleteEvent="deleteEvent" :types="types" />
-      </v-col>
       <v-col cols="2">
         <v-container fill-height>
           <v-row>
@@ -13,6 +10,10 @@
           </v-row>
         </v-container>
       </v-col>
+      <v-col cols="12" class="calendar-bg mt-5">
+        <Calendar @deleteEvent="deleteEvent" :types="types" />
+      </v-col>
+      
     </v-row>
   </v-container>
 </template>
@@ -52,3 +53,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.calendar-bg {
+  background-color: #FFBA01;
+}
+</style>

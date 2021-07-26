@@ -43,6 +43,13 @@
       </v-col>
     </v-row>
   </v-container>
+  <v-footer class="footer" color="grey darken-4" padless app>
+      <v-row justify="center" no-gutters>
+        <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
+          {{ new Date().getFullYear() }} — <strong>Fridge.App</strong>
+        </v-col>
+      </v-row>
+    </v-footer>
   </div>
 </template>
 <script>
