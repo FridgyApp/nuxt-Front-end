@@ -7,7 +7,7 @@
     >
       <template #activator="{ on, attrs }">
         <v-btn
-          class="home-buttons mx-2"
+          class="rounded-pill mx-2"
           color="#333"
           dark
           v-bind="attrs"
@@ -71,8 +71,3 @@
   }
 </script>
 
-<style scoped>
-.home-buttons {
-  border-radius: 50px;
-}
-</style>

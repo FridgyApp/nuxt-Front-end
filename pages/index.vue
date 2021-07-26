@@ -12,10 +12,23 @@
     <v-row>
       <v-container fluid>
         <v-row>
-          <v-col cols="3" class="primary">
+          <v-col cols="3" class="stickyNote-bg">
             <v-container>
               <v-row>
-                <v-col v-for="note in notes" :key="note._id" cols="6">
+                <v-col cols="3" class="shoppingList-bg">
+                   <ShoppingList
+                    v-if="Array.isArray(list)"
+                    :list="list"
+                     @erase="deleteItem"
+                    />
+               </v-col>
+                
+               
+              </v-row>
+            </v-container>
+          </v-col>
+          <v-col cols="6" class="calendar-bg"> <Calendar v-if="Array.isArray(types)" :types="types" /> </v-col>
+           <v-col v-for="note in notes" :key="note._id" cols="6">
                   <StickyNote
                     v-if="Array.isArray(notes)"
                     :note="note"
@@ -23,17 +36,6 @@
                     @edit="editNote"
                   ></StickyNote>
                 </v-col>
-              </v-row>
-            </v-container>
-          </v-col>
-          <v-col cols="6" class="calendar-bg"> <Calendar :types="types"/> </v-col>
-          <v-col cols="3" class="shoppingList-bg">
-            <ShoppingList
-              v-if="Array.isArray(list)"
-              :list="list"
-              @erase="deleteItem"
-            />
-          </v-col>
         </v-row>
       </v-container>
     </v-row>
@@ -43,20 +45,23 @@
 <script>
 export default {
   middleware: 'auth',
-  async asyncData({ $axios }) {
+async asyncData({ $axios }) {
     const [list, notes, events] = await Promise.all([
-      $axios.$get(`/api/shoppingList/`),
-      $axios.$get(`/api/stickynotes/`),
-      $axios.$get(`/api/events`)
+      $axios.$get('/api/shoppingList/'),
+      $axios.$get('/api/stickynotes/'),
+      $axios.$get('/api/events'),
     ])
-    const types = events.map((event) => {
-      return {
-        ...event,
-        start: new Date(event.start).getTime(),
-        end: new Date(event.end).getTime(),
-      }
-    })
-    return { list, notes, types }
+    if (Array.isArray(events)) {
+      const types = events.map((event) => {
+        return {
+          ...event,
+          start: new Date(event.start).getTime(),
+          end: new Date(event.end).getTime(),
+        }
+      })
+      return { list, notes, types }
+    }
+    return { list, notes, types:events }
   },
   methods: {
     async createGroup(name) {

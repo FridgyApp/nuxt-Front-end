@@ -1,10 +1,19 @@
 <template>
+  <div>
+    <v-container>
+      <v-row>
+        <div class="logo-login mb-5" >
+          <img src="../static/logo-blanco.png">  
+        </div>
+      </v-row>
+    </v-container>
   <v-container>
     <v-row>
       <v-col class="d-flex justify-center mb-6 container-login">
         <v-form ref="form" v-model="valid" class="post-it" lazy-validation>
           <v-card class="form-login" rounded>
             <v-text-field
+              class="rounded-pill"
               v-model="email"
               solo
               :rules="emailRules"
@@ -12,6 +21,7 @@
               required
             ></v-text-field>
             <v-text-field
+              class="rounded-pill"
               v-model="password"
               solo
               :rules="passwordRules"
@@ -21,18 +31,19 @@
             <v-btn
               :disabled="!valid"
               color="#FFBA01"
-              class="my-1"
+              class="rounded-pill my-1"
               block
               @click="validate"
             >
               Log In
             </v-btn>
-            <v-btn to="/signup" block plain> Sign Up </v-btn>
+            <v-btn to="/signup" block plain color="white"> Sign Up </v-btn>
           </v-card>
         </v-form>
       </v-col>
     </v-row>
   </v-container>
+  </div>
 </template>
 <script>
 export default {
@@ -68,6 +79,7 @@ export default {
 </script>
 
 <style scoped>
+
 .form-login {
   padding: 2rem;
   background-color: #666;

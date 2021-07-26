@@ -3,11 +3,15 @@
     <div class="overflow-hidden">
       <v-app-bar class="navBar" dark>
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-        <v-toolbar-title>Home</v-toolbar-title>
+        <img src="../static/logo-blanco.png"
+          width="180px">
+        <v-spacer></v-spacer>
+        <v-toolbar-title>La Casa de Pepe</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn
-          class="navBar-Button mx-3" 
+          class="navBar-Button mx-3 rounded-pill"
+ 
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
@@ -20,19 +24,16 @@
           {{ item.title }}
         </v-btn>
         <v-spacer></v-spacer>
+        <div>
+          <GroupsButton />
+        </div>    
+        
         <v-btn 
-          class="navBar-Button mx-3"
-          elevation="2" 
-          color="#666">
-          <v-icon>mdi-cog-outline</v-icon>
-          Settings
-        </v-btn>
-        <v-btn 
-          class="navBar-Button mx-3"
+          class="navBar-Button mx-3 rounded-pill"
           @click="logoutSesion" 
           elevation="2" 
           color="#666">
-          <v-icon>mdi-cog-outline</v-icon>
+          <v-icon>mdi-logout</v-icon>
           Logout
         </v-btn>
       </v-app-bar>
@@ -62,20 +63,6 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
 
-            <v-divider></v-divider>
-
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-cog-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Settings</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-icon>
-                <v-icon>mdi-cog-outline</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Logout</v-list-item-title>
-            </v-list-item>
           </v-list-item-group>
         </v-list>
       </v-navigation-drawer>
@@ -105,7 +92,7 @@ export default {
       group: null,
       items: [
         {
-          icon: 'mdi-calendar-month',
+          icon: 'mdi-home',
           title: 'Home',
           to: '/',
         },
@@ -115,7 +102,7 @@ export default {
           to: '/shopping',
         },
         {
-          icon: 'mdi-note-outline',
+          icon: 'mdi-calendar-month',
           title: 'Calendar',
           to: '/calendar',
         },

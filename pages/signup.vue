@@ -100,6 +100,9 @@ export default {
 </script>
 
 <style scoped>
+.my-1 {
+  border-radius: 50px;
+}
 .form-login {
   padding: 2rem;
   background-color: #666;
