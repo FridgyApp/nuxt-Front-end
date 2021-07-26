@@ -117,7 +117,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+#app {
+  font-family: 'Dosis', sans-serif;
+}
+
 .white {
   color: #fff;
 }

@@ -3,7 +3,9 @@
     <v-row no-gutters>
       <v-col cols="5" class="mt-3">
         <v-container>
+          <v-card>
           <ProductsList :products="products" @moveShopping="addList" />
+          </v-card>
         </v-container>
         <v-container>
           <v-card
@@ -32,7 +34,9 @@
       </v-col>
       <v-col cols="5" class="mt-3">
         <v-container>
+          <v-card>
           <ShoppingList :list="list" @erase="deleteItem" />
+          </v-card>
         </v-container>
       </v-col>
     </v-row>
@@ -83,20 +87,8 @@ export default {
 </script>
 
 <style scoped>
-.scroll {
-  overflow: scroll;
-}
 .title {
   font-family: 'Raleway', sans-serif !important;
   color: #ffba01;
-}
-::-webkit-scrollbar {
-  display: none;
-}
-.app_bar {
-  max-height: calc(100vh - 64px);
-  height: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 </style>

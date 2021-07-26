@@ -3,8 +3,8 @@
     <v-row no-gutters>
       <v-card
         class="mx-auto scroll"
-        width="auto"
-        max-height="600"
+        width="700"
+        max-height="550"
         overflow-visible
       >
         <v-app-bar color="#333" dark class="app_bar">
@@ -155,20 +155,20 @@ export default {
 </script>
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+
 .scroll {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .title {
-  font-family: 'Raleway', sans-serif !important;
+  font-family: 'Dosis', sans-serif !important;
   color: #333;
 }
-::-webkit-scrollbar {
-  display: none;
-}
+
 .app_bar {
   max-height: calc(100vh - 64px);
   height: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
+  
 }
 </style>

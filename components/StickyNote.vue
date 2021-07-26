@@ -46,8 +46,6 @@
         >mdi-trash-can-outline</v-icon
       ></v-card-title
     >
-    
-
     <v-card-text class="text--primary">
       <div>{{ note.description }}</div>
     </v-card-text>

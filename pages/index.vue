@@ -10,25 +10,23 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col>
       <v-container fluid>
         <v-row>
-          <v-col cols="3" class="stickyNote-bg">
+          <v-col cols="3" class="shoppingList-bg">
+            <ShoppingList
+            v-if="Array.isArray(list)"
+            :list="list"
+              @erase="deleteItem"
+            />
+          </v-col>
+          <v-col cols="6" class="calendar-bg"> 
+            <Calendar v-if="Array.isArray(types)" :types="types" /> 
+          </v-col>
+          <v-col cols="3">
             <v-container>
               <v-row>
-                <v-col cols="3" class="shoppingList-bg">
-                   <ShoppingList
-                    v-if="Array.isArray(list)"
-                    :list="list"
-                     @erase="deleteItem"
-                    />
-               </v-col>
-                
-               
-              </v-row>
-            </v-container>
-          </v-col>
-          <v-col cols="6" class="calendar-bg"> <Calendar v-if="Array.isArray(types)" :types="types" /> </v-col>
-           <v-col v-for="note in notes" :key="note._id" cols="6">
+                <v-col class="stickyNote-bg" v-for="note in notes" :key="note._id">
                   <StickyNote
                     v-if="Array.isArray(notes)"
                     :note="note"
@@ -36,8 +34,12 @@
                     @edit="editNote"
                   ></StickyNote>
                 </v-col>
+              </v-row>
+            </v-container>
+          </v-col>      
         </v-row>
       </v-container>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -105,19 +107,16 @@ async asyncData({ $axios }) {
 
 <style scoped>
 .stickyNote-bg {
-  display: grid;
   background-color: white;
   width: 100%;
   min-height: 700px;
 }
 
 .calendar-bg {
-  display: grid;
   background-color: #ffba01;
 }
 
 .shoppingList-bg {
-  display: grid;
   background-color: white;
 }
 </style>
