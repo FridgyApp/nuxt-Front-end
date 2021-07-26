@@ -5,7 +5,10 @@
         <div class="d-flex justify-center align-center py-2">
           <FormAddGroup @addGroup="createGroup" />
           <FormAddPost-It @addPostIt="addPostIt" />
-          <FormAddUserGroup @addUserGroup="addUserGroup" />
+          <FormAddUserGroup @addUserGroup="addUserGroup" />          
+        </div>
+        <div>
+          <GroupModal/>
         </div>
       </v-col>
     </v-row>
@@ -26,7 +29,9 @@
               </v-row>
             </v-container>
           </v-col>
-          <v-col cols="6" class="calendar-bg"> <Calendar :types="types"/> </v-col>
+          <v-col cols="6" class="calendar-bg">
+            <Calendar :types="types" />
+          </v-col>
           <v-col cols="3" class="shoppingList-bg">
             <ShoppingList
               v-if="Array.isArray(list)"
@@ -47,7 +52,7 @@ export default {
     const [list, notes, events] = await Promise.all([
       $axios.$get(`/api/shoppingList/`),
       $axios.$get(`/api/stickynotes/`),
-      $axios.$get(`/api/events`)
+      $axios.$get(`/api/events`),
     ])
     const types = events.map((event) => {
       return {
@@ -63,7 +68,7 @@ export default {
       try {
         await this.$axios.$post('api/group', { name, members: [] })
       } catch (error) {
-        console.log('algo paso')
+        console.log('Can not create group')
       }
     },
     async deleteItem(id) {
@@ -89,7 +94,7 @@ export default {
     async addUserGroup(email) {
       try {
         const user = await this.$axios.$put(`/api/group`, { email })
-        console.log(user)
+        console.log(user)  
       } catch (error) {
         console.log({ error })
       }

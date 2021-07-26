@@ -29,6 +29,9 @@
             </v-btn>
             <v-btn to="/signup" block plain> Sign Up </v-btn>
           </v-card>
+    <v-row class="d-flex justify-center"  v-if="this.loginError">
+      <ErrorModal :errorMessage= "errorMessage"/>
+    </v-row>
         </v-form>
       </v-col>
     </v-row>
@@ -40,11 +43,14 @@ export default {
   data: () => ({
     valid: true,
     password: '',
+    loginError: false,
+    errorMessage: '',
     passwordRules: [
       (v) => !!v || 'Password is required',
       (v) => (v && v.length >= 6) || 'Name must be less than 6 characters',
     ],
     email: '',
+
     emailRules: [
       (v) => !!v || 'E-mail is required',
       (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -53,14 +59,20 @@ export default {
 
   methods: {
     async validate() {
-      this.$refs.form.validate()
-      if (this.password !== '' && this.email !== '') {
-        await this.$auth.loginWith('local', {
-          data: {
-            email: this.email,
-            password: this.password,
-          },
-        })
+      try {
+        this.$refs.form.validate()
+        if (this.password !== '' && this.email !== '') {
+          await this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          })
+        }
+      } catch (error) {
+        this.loginError = !this.loginError
+        this.errorMessage = error.response.data.msg
+        console.clear()
       }
     },
   },
