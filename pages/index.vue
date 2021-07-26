@@ -14,10 +14,10 @@
         <v-row>
           <v-col cols="3" class="primary">
             <v-container>
-              <v-row>
+              <v-row v-if="notes">
                 <v-col v-for="note in notes" :key="note._id" cols="6">
                   <StickyNote
-                    v-if="Array.isArray(notes)"
+                    v-if="notes"
                     :note="note"
                     @delete="deleteNote"
                     @edit="editNote"
@@ -26,13 +26,11 @@
               </v-row>
             </v-container>
           </v-col>
-          <v-col cols="6" class="calendar-bg"> <Calendar :types="types"/> </v-col>
+          <v-col cols="6" class="calendar-bg">
+            <Calendar v-if="types" :types="types" />
+          </v-col>
           <v-col cols="3" class="shoppingList-bg">
-            <ShoppingList
-              v-if="Array.isArray(list)"
-              :list="list"
-              @erase="deleteItem"
-            />
+            <ShoppingList v-if="list" :list="list" @erase="deleteItem" />
           </v-col>
         </v-row>
       </v-container>
@@ -44,28 +42,54 @@
 export default {
   middleware: 'auth',
   async asyncData({ $axios }) {
-    const [list, notes, events] = await Promise.all([
-      $axios.$get(`/api/shoppingList/`),
-      $axios.$get(`/api/stickynotes/`),
-      $axios.$get(`/api/events`)
-    ])
-    const types = events.map((event) => {
-      return {
-        ...event,
-        start: new Date(event.start).getTime(),
-        end: new Date(event.end).getTime(),
+    try {
+      const {
+        name,
+        members,
+        shoppingList: list,
+        stickyNotes: notes,
+        events,
+      } = await $axios.$get('/api/group')
+      if (name) {
+        const types = events.map((event) => {
+          return {
+            ...event,
+            start: new Date(event.start).getTime(),
+            end: new Date(event.end).getTime(),
+          }
+        })
+        return {
+          list,
+          notes,
+          types,
+          name,
+          members,
+        }
       }
-    })
-    return { list, notes, types }
+      return {
+        list,
+        notes,
+        types: events,
+        name,
+        members,
+      }
+    } catch (error) {}
+  },
+  mounted() {
+    this.$nuxt.$emit('infoGroup', this.name)
   },
   methods: {
     async createGroup(name) {
       try {
-        await this.$axios.$post('api/group', { name, members: [] })
+        const user = await this.$axios.$post('api/group', { name, members: [] })
+        console.log(user)
+        await this.$auth.setUser(user)
+        this.$nuxt.refresh()
       } catch (error) {
         console.log('algo paso')
       }
     },
+
     async deleteItem(id) {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
     },

@@ -3,7 +3,7 @@
     <div class="overflow-hidden">
       <v-app-bar class="navBar" dark>
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-        <v-toolbar-title>Home</v-toolbar-title>
+        <v-toolbar-title>{{nameGroup}}</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn
@@ -95,12 +95,9 @@
 
 <script>
 export default {
-  asyncData({$auth}){
-    console.log($auth.$storage)
-    return {nameGroup: $auth.nameGroup}
-  },
   data() {
     return {
+      nameGroup:'',
       drawer: false,
       group: null,
       items: [
@@ -127,6 +124,13 @@ export default {
       await this.$auth.logout()
     }
   },
+  created () {
+    this.$nuxt.$on('infoGroup', (name) => {
+     this.nameGroup = name
+     console.log('hola')
+   })
+  },
+  
 }
 </script>
 
