@@ -18,19 +18,22 @@
         <v-list-item-content>
           <v-list-item-title v-text="item.productId.name"></v-list-item-title>
           <v-form>
-            <v-text-field label="Comments" Comments></v-text-field>
+            <v-text-field label="Comments" comments></v-text-field>
+
+          </v-form>
+        </v-list-item-content>
+            <v-list-item-action>
+
             <v-btn
               class="mx-2"
               fab
               dark
               small
               color="primary"
-              @click="deleteProduct(item)"
-            >
-              <v-icon dark> mdi-minus </v-icon>
+              @click="deleteProduct(item)">
+              <v-icon dark> mdi-trash-can-outline </v-icon>
             </v-btn>
-          </v-form>
-        </v-list-item-content>
+            </v-list-item-action>
       </v-list-item>
     </v-list>
   </v-card>
@@ -56,6 +59,7 @@ export default {
 </script>
 
 <style scoped>
+
 .app_bar {
   max-height: calc(100vh - 64px);
   height: auto;

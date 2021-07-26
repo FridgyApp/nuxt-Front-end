@@ -23,12 +23,13 @@
           <v-col cols="6" class="calendar-bg"> 
             <Calendar v-if="Array.isArray(types)" :types="types" /> 
           </v-col>
-          <v-col cols="3">
+          <v-col cols="3" class="stickyNote-bg">
             <v-container>
               <v-row>
-                <v-col class="stickyNote-bg" v-for="note in notes" :key="note._id">
+                <v-col v-for="note in notes" :key="note._id">
                   <StickyNote
-                    v-if="Array.isArray(notes)"
+                    
+                    v-if="Array.isArray(notes)" 
                     :note="note"
                     @delete="deleteNote"
                     @edit="editNote"
@@ -107,7 +108,7 @@ async asyncData({ $axios }) {
 
 <style scoped>
 .stickyNote-bg {
-  background-color: white;
+  background-color: #666;
   width: 100%;
   min-height: 700px;
 }
@@ -117,6 +118,6 @@ async asyncData({ $axios }) {
 }
 
 .shoppingList-bg {
-  background-color: white;
+  background-color: #666;
 }
 </style>
