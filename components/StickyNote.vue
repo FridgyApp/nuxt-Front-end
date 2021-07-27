@@ -41,8 +41,9 @@
             </v-btn>
             <v-btn color="blue darken-1" text @click="editNote"> Save </v-btn>
           </v-card-actions>
-        </v-card> </v-dialog
-      ><v-icon @click="eraseNote(note._id)"
+        </v-card> 
+      </v-dialog>
+        <v-icon @click="eraseNote(note._id)"
         >mdi-trash-can-outline</v-icon
       ></v-card-title
     >

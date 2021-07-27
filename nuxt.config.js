@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - prueba',
-    title: 'prueba',
+    titleTemplate: 'Fridge.App',
+    title: '',
     htmlAttrs: {
       lang: 'en'
     },
@@ -76,8 +76,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-     baseURL: 'https://fridgyapp.herokuapp.com/'
-    // baseURL: 'http://localhost:5501/'
+     // baseURL:'https://fridgyapp.herokuapp.com/'
+    baseURL: 'http://localhost:5501/'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

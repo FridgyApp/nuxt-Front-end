@@ -3,8 +3,7 @@
     <v-row class="px-4">
       <v-col cols="12" class="d-flex justify-end mb-2">
         <div class="d-flex justify-center align-center py-2">
-          <FormAddGroup @addGroup="createGroup" />
-          <FormAddPost-It @addPostIt="addPostIt" />        
+          <FormAddGroup @addGroup="createGroup" />        
         </div>
         <div>
           <GroupModal/>
@@ -36,7 +35,13 @@
                     @delete="deleteNote"
                     @edit="editNote"
                   ></StickyNote>
+                  
                 </v-col>
+              </v-row>
+              <v-row>
+                <FormAddPost-It
+                @addPostIt="addPostIt"
+                />
               </v-row>
             </v-container>
           </v-col>      
@@ -106,6 +111,7 @@ export default {
       this.notes = await this.$axios.$delete(`/api/stickynotes/${id}`, {})
     },
     async editNote(note) {
+      console.log('holaaaaaaa', note)
       const modifiedNote = await this.$axios.$put(
         `/api/stickynotes/${note._id}`,
         { note }

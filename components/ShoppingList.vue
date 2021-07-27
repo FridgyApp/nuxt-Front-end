@@ -23,7 +23,15 @@
           </v-form>
         </v-list-item-content>
             <v-list-item-action>
-
+            <v-btn
+              class="mx-2"
+              fab
+              dark
+              small
+              color="primary"
+              @click="deleteProduct(item)">
+              <v-icon dark> mdi-check </v-icon>
+            </v-btn><br>
             <v-btn
               class="mx-2"
               fab
