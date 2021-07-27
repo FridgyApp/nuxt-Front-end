@@ -2,9 +2,7 @@
   <v-container fluid>
     <v-row class="px-4">
       <v-col cols="12" class="d-flex justify-end mb-2">
-        <div class="d-flex justify-center align-center py-2">
-          <FormAddGroup @addGroup="createGroup" />        
-        </div>
+        
         <div>
           <GroupModal/>
         </div>

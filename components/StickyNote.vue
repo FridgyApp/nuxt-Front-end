@@ -1,16 +1,16 @@
 <template>
 <v-hover v-slot="{ hover }">
-  <v-card class="mx-auto mx-4" max-width="400" min-width="200" min-height="120">
+  <v-card class="mx-auto mx-4" max-width="400" min-width="200" min-height="120" >
     <v-card-title
       >{{ note.name }}
       <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" persistent max-width="600px">
+      <v-dialog v-model="dialog" persistent max-width="600px" transition="fab-transition">
         <template #activator="{ on, attrs }">
           <v-icon :color="hover?'grey darken-2':'transparent'"  v-bind="attrs" v-on="on" 
             >mdi-square-edit-outline</v-icon
           >
         </template>
-        <v-card>
+        <v-card >
           <v-card-title>
             <span class="text-h5">Add Sticky Note</span>
           </v-card-title>
@@ -37,10 +37,10 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
+            <v-btn color="#666" text @click="dialog = false">
               Close
             </v-btn>
-            <v-btn color="blue darken-1" text @click="editNote"> Save </v-btn>
+            <v-btn color="#666" text @click="editNote"> Save </v-btn>
           </v-card-actions>
         </v-card> 
       </v-dialog>
