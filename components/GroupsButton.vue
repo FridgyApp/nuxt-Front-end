@@ -7,8 +7,8 @@
           color="#666"
           dark
           v-bind="attrs"
-          v-on="on"
           elevation="2"
+          v-on="on"
         >
           <v-icon>mdi-account-multiple</v-icon>
           Group
