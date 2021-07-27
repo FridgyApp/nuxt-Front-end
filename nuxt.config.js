@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - prueba',
-    title: 'prueba',
+    titleTemplate: 'Fridge.App',
+    title: '',
     htmlAttrs: {
       lang: 'en'
     },

@@ -23,7 +23,15 @@
           </v-form>
         </v-list-item-content>
             <v-list-item-action>
-
+            <v-btn
+              class="mx-2"
+              fab
+              dark
+              small
+              color="primary"
+              @click="editProduct(item._id)">
+              <v-icon dark> mdi-check </v-icon>
+            </v-btn><br>
             <v-btn
               class="mx-2"
               fab
@@ -32,14 +40,6 @@
               color="primary"
               @click="deleteProduct(item)">
               <v-icon dark> mdi-trash-can-outline dark </v-icon>
-            </v-btn>
-            <v-btn
-              class="mx-2"
-              fab
-              dark
-              small
-              @click="editProduct(item._id)">
-              <v-icon dark> mdi-trash-can-outline </v-icon>
             </v-btn>
             </v-list-item-action>
       </v-list-item>

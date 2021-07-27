@@ -3,12 +3,12 @@
     <v-row class="px-4">
       <v-col cols="12" class="d-flex justify-end mb-2">
         <div class="d-flex justify-center align-center py-2">
-          <FormAddPost-It @addPostIt="addPostIt" />        
+          <FormAddPost-It @addPostIt="addPostIt" />
         </div>
       </v-col>
     </v-row>
     <v-row>
-      <v-col >
+      <v-col>
         <v-container v-if="Array.isArray(list)" fluid>
           <v-row>
             <v-col cols="3" class="shoppingList-bg">
@@ -28,12 +28,14 @@
                     ></StickyNote>
                   </v-col>
                 </v-row>
+                <v-row>
+                  <FormAddPost-It @addPostIt="addPostIt" />
+                </v-row>
               </v-container>
             </v-col>
           </v-row>
         </v-container>
-        <v-container v-else d-flex
-      justify-space-around>
+        <v-container v-else d-flex justify-space-around>
           <GroupModal />
         </v-container>
       </v-col>
@@ -79,7 +81,7 @@ export default {
     } catch (error) {}
   },
   mounted() {
-    this.$nuxt.$emit('infoGroup',{ name:this.name, members:this.members})
+    this.$nuxt.$emit('infoGroup', { name: this.name, members: this.members })
   },
   methods: {
     async createGroup(name) {
@@ -99,6 +101,7 @@ export default {
       this.notes = await this.$axios.$delete(`/api/stickynotes/${id}`, {})
     },
     async editNote(note) {
+      console.log('holaaaaaaa', note)
       const modifiedNote = await this.$axios.$put(
         `/api/stickynotes/${note._id}`,
         { note }

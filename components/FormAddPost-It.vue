@@ -1,11 +1,18 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="600px">
+  <v-dialog 
+    v-model="dialog" 
+    persistent 
+    max-width="600px"
+    transition="fab-transition">
     <template #activator="{ on, attrs }">
       <v-btn 
-        class="rounded-pill mx-2" 
-        color="#333" 
-        dark v-bind="attrs" v-on="on">
-        Add Sticky Note
+        class="mx-2" 
+        color="#FFBA01" 
+        fab
+        dark 
+        v-bind="attrs" v-on="on">
+         Add<v-icon dark>mdi-plus</v-icon>
+        
       </v-btn>
     </template>
     <v-card>
@@ -35,10 +42,10 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="dialog = false">
+        <v-btn color="#666" text @click="dialog = false">
           Close
         </v-btn>
-        <v-btn color="blue darken-1" text @click="addPostIt"> Save </v-btn>
+        <v-btn color="#666" text @click="addPostIt"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
