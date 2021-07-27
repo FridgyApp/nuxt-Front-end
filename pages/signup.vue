@@ -67,11 +67,10 @@
       <v-row justify="center" no-gutters>
         <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} — <strong>Fridg.App</strong> — by Bruno
-          Aggierni <a href="https://www.linkedin.com/in/bruno-aggierni/"><v-icon color="blue" v-on="on"
-            >mdi-linkedin</v-icon
+          Aggierni <a href="https://www.linkedin.com/in/bruno-aggierni/"><v-icon color="blue">mdi-linkedin</v-icon
           ></a>, Álvaro Poncio <a href="https://www.linkedin.com/in/alvaro-poncio/"><v-icon color="blue"
             >mdi-linkedin</v-icon
-          ></a> Adrian Duran <a href="https://www.linkedin.com/in/adrian-duran-gomez/"><v-icon color="blue">mdi-linkedin</v-icon
+          ></a>, Adrian Duran <a href="https://www.linkedin.com/in/adrian-duran-gomez/"><v-icon color="blue">mdi-linkedin</v-icon
           ></a>
         </v-col>
       </v-row>
