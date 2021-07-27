@@ -35,7 +35,7 @@
       <v-col cols="5" class="mt-3">
         <v-container>
           <v-card>
-          <ShoppingList :list="list" @erase="deleteItem" />
+          <ShoppingList :list="list" @erase="deleteItem" @editNoteProduct="editNoteProduct" />
           </v-card>
         </v-container>
       </v-col>
@@ -82,6 +82,12 @@ export default {
         console.log(error.response.data.message)
       }
     },
+    async editNoteProduct({id, notes}){
+       try {
+        const hola = await this.$axios.$put(`/api/shoppingList/${id}`,{notes})
+        console.log(hola)
+      } catch (error) {}
+    }
   },
 }
 </script>

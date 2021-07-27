@@ -1,5 +1,5 @@
 <template>
-  <v-container >
+  <v-container>
     <v-row>
       <v-col cols="2">
         <v-container fill-height>
@@ -11,9 +11,12 @@
         </v-container>
       </v-col>
       <v-col cols="12" class="calendar-bg mt-5">
-        <Calendar @deleteEvent="deleteEvent" :types="types" />
+        <Calendar
+          @deleteEvent="deleteEvent"
+          @editEvent="editEvent"
+          :types="types"
+        />
       </v-col>
-      
     </v-row>
   </v-container>
 </template>
@@ -42,20 +45,37 @@ export default {
         this.types.push(event)
       } catch (error) {}
     },
-    async deleteEvent(id){
+    async deleteEvent(id) {
       try {
         await this.$axios.$delete(`/api/events/${id}`)
-        this.types = this.types.filter(event=>event._id !== id)
-      } catch (error) {
         
+        this.types = this.types.filter((event) => event._id !== id)
+        console.log(this.types)
+      } catch (error) {
+        console.log(error)
       }
-    }
+    },
+    async editEvent({ id, ...event }) {
+      try {
+        const eventUpdate = await this.$axios.$put(`/api/events/${id}`, event)
+        console.log(eventUpdate, event)
+        eventUpdate.start = new Date(event.start).getTime()
+        eventUpdate.end = new Date(event.end).getTime()
+        this.types = await this.types.map((ev) => {
+          if (ev._id === eventUpdate._id) {
+            console.log('entre')
+            return eventUpdate
+          }
+          return ev
+        })
+      } catch (error) {}
+    },
   },
 }
 </script>
 
 <style scoped>
 .calendar-bg {
-  background-color: #FFBA01;
+  background-color: #ffba01;
 }
 </style>

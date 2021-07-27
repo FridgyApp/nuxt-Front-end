@@ -3,36 +3,35 @@
     <div class="overflow-hidden">
       <v-app-bar class="navBar" dark>
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-        <img src="../static/logo-blanco.png"
-          width="180px">
+        <img src="../static/logo-blanco.png" width="180px" />
         <v-spacer></v-spacer>
-        <v-toolbar-title>{{nameGroup}}</v-toolbar-title>
+        <v-toolbar-title>{{ nameGroup }}</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn
           class="navBar-Button mx-3 rounded-pill"
- 
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
           exact
           elevation="2"
-          color="#ffba01" light
-        
+          color="#ffba01"
+          light
         >
           <v-icon>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
         <v-spacer></v-spacer>
         <div>
-          <GroupsButton />
-        </div>    
-        
-        <v-btn 
+          <GroupsButton :members="members" />
+        </div>
+
+        <v-btn
           class="navBar-Button mx-3 rounded-pill"
-          @click="logoutSesion" 
-          elevation="2" 
-          color="#666">
+          @click="logoutSesion"
+          elevation="2"
+          color="#666"
+        >
           <v-icon>mdi-logout</v-icon>
           Logout
         </v-btn>
@@ -62,7 +61,6 @@
               </v-list-item-icon>
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
-
           </v-list-item-group>
         </v-list>
       </v-navigation-drawer>
@@ -84,7 +82,8 @@
 export default {
   data() {
     return {
-      nameGroup:'',
+      members: [],
+      nameGroup: '',
       drawer: false,
       group: null,
       items: [
@@ -106,18 +105,18 @@ export default {
       ],
     }
   },
+    created() {
+    this.$nuxt.$on('infoGroup', ({name, members}) => {
+      this.nameGroup = name
+      this.members = members;
+    })
+  },
   methods: {
     async logoutSesion() {
       await this.$auth.logout()
-    }
+    },
   },
-  created () {
-    this.$nuxt.$on('infoGroup', (name) => {
-     this.nameGroup = name
-     console.log('hola')
-   })
-  },
-  
+
 }
 </script>
 

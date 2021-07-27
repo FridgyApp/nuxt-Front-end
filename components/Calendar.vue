@@ -23,7 +23,7 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-menu bottom right>
-              <template v-slot:activator="{ on, attrs }">
+              <template #activator="{ on, attrs }">
                 <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
                   <span>{{ typeToLabel[type] }}</span>
                   <v-icon right> mdi-menu-down </v-icon>
@@ -67,7 +67,7 @@
             <v-card v-if="vista" color="grey lighten-4" min-width="350px" flat>
               <v-toolbar :color="selectedEvent.color" dark>
                 <v-btn icon>
-                  <v-icon @click="vista=false">mdi-pencil</v-icon>
+                  <v-icon @click="vista = !vista">mdi-pencil</v-icon>
                 </v-btn>
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
@@ -75,10 +75,7 @@
                   <v-icon>mdi-trash-can-outline</v-icon>
                 </v-btn>
               </v-toolbar>
-              <v-card-text>
-                <span v-html="selectedEvent.details"></span>
-              </v-card-text>
-              <v-card-text>{{ selectedEvent.name }}</v-card-text>
+              <v-card-text>{{ selectedEvent.description }}</v-card-text>
               <v-card-actions>
                 <v-btn text color="secondary" @click="selectedOpen = false">
                   Cancel
@@ -89,19 +86,31 @@
             <v-card v-else color="grey lighten-4" min-width="350px" flat>
               <v-toolbar :color="selectedEvent.color" dark>
                 <v-btn icon>
-                  <v-icon @click="vista=true" >mdi-pencil</v-icon>
+                  <v-icon @click="vista = !vista">mdi-pencil</v-icon>
                 </v-btn>
-                <input type="text">
+                <input type="text" />
                 <v-spacer></v-spacer>
                 <v-btn icon @click="deleteEvent">
                   <v-icon>mdi-trash-can-outline</v-icon>
                 </v-btn>
               </v-toolbar>
               <v-card-text>
-                <input type="text">
+                <v-text-field v-model="editEvents" label="Event"></v-text-field>
+                <v-text-field
+                  v-model="editDescription"
+                  label="Description"
+                ></v-text-field>
+                <input v-model="editStart" type="datetime-local" />
+                <input v-model="editEnd" type="datetime-local" />
               </v-card-text>
-              <input type="text">
               <v-card-actions>
+                <v-btn
+                  text
+                  color="secondary"
+                  @click="editEvent(selectedEvent._id)"
+                >
+                  Save
+                </v-btn>
                 <v-btn text color="secondary" @click="selectedOpen = false">
                   Cancel
                 </v-btn>
@@ -120,7 +129,11 @@ export default {
     types: Array,
   },
   data: () => ({
-    vista:true,
+    editDescription: '',
+    editEvents: '',
+    editStart:'',
+    editEnd:'',
+    vista: true,
     focus: '',
     type: 'month',
     typeToLabel: {
@@ -164,6 +177,8 @@ export default {
         this.selectedEvent = event
         this.selectedElement = nativeEvent.target
         this.selectedOpen = true
+        this.editEvents = this.selectedEvent.name
+        this.editDescription = this.selectedEvent.description
       }
 
       if (!this.selectedOpen) {
@@ -174,6 +189,18 @@ export default {
       }
 
       nativeEvent.stopPropagation()
+    },
+    editEvent(id) {
+      this.$emit('editEvent',{
+        id,
+        timed:this.selectedEvent.timed,
+        color:this.selectedEvent.color,
+        name:this.editEvents,
+        description:this.editDescription,
+        start:this.selectedEvent.start,
+        end:this.selectedEvent.end,
+        })
+      this.selectedOpen = false
     },
     deleteEvent() {
       this.$emit('deleteEvent', this.selectedEvent._id)

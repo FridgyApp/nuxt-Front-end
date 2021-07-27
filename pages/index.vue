@@ -86,13 +86,12 @@ export default {
     } catch (error) {}
   },
   mounted() {
-    this.$nuxt.$emit('infoGroup', this.name)
+    this.$nuxt.$emit('infoGroup',{ name:this.name, members:this.members})
   },
   methods: {
     async createGroup(name) {
       try {
         const user = await this.$axios.$post('api/group', { name, members: [] })
-        console.log(user)
         await this.$auth.setUser(user)
         this.$nuxt.refresh()
       } catch (error) {

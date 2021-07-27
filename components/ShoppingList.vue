@@ -18,7 +18,7 @@
         <v-list-item-content>
           <v-list-item-title v-text="item.productId.name"></v-list-item-title>
           <v-form>
-            <v-text-field label="Comments" comments></v-text-field>
+            <v-text-field :value="item.notes" label="Comments" comments></v-text-field>
 
           </v-form>
         </v-list-item-content>
@@ -33,6 +33,14 @@
               @click="deleteProduct(item)">
               <v-icon dark> mdi-trash-can-outline </v-icon>
             </v-btn>
+            <v-btn
+              class="mx-2"
+              fab
+              dark
+              small
+              @click="editProduct(item._id)">
+              <v-icon dark> mdi-trash-can-outline </v-icon>
+            </v-btn>
             </v-list-item-action>
       </v-list-item>
     </v-list>
@@ -44,6 +52,11 @@ export default {
   props: {
     list: Array,
   },
+  data() {
+    return {
+      comments: ''
+    }
+  },
   computed: {
     listUpdate() {
       return this.list 
@@ -54,6 +67,9 @@ export default {
       
       this.$emit('erase',item.productId._id)
     },
+    editProduct(id){
+       this.$emit('editNoteProduct',{id, notes:this.comments})
+    }
   },
 }
 </script>
