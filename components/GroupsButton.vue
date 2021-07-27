@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-menu offset-y>
+    <v-menu offset-y transition="fab-transition">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="navBar-Button mx-3 rounded-pill"
@@ -19,6 +19,14 @@
         <v-list-item v-for="(item, index) in items" :key="index">
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
+        <v-btn plain><FormAddUserGroup /></v-btn>
+
+        <!-- <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item> -->
       </v-list>
     </v-menu>
   </div>
@@ -30,12 +38,21 @@ export default {
     members: Array,
   },
   data: () => ({
+    dialog: false,
+    email: '',
     items: [],
   }),
   mounted() {
     // this.items.members.push( { title: 'Add User in Group' })
     this.items = this.members
-    this.items.push({name:'Add User in Group'})
+    this.items.push({ name: 'Add User in Group' })
+  },
+  methods: {
+    addUserGroup() {
+      this.$emit('addUserGroup', this.email)
+      this.dialog = false
+      this.email = ''
+    },
   },
 }
 </script>

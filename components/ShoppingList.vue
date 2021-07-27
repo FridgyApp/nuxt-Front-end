@@ -18,7 +18,7 @@
         <v-list-item-content>
           <v-list-item-title v-text="item.productId.name"></v-list-item-title>
           <v-form>
-            <v-text-field :value="item.notes" label="Comments" comments></v-text-field>
+            <v-text-field v-model="comments" :value="item.notes" label="Comments"  ></v-text-field>
 
           </v-form>
         </v-list-item-content>
@@ -31,7 +31,7 @@
               small
               color="primary"
               @click="deleteProduct(item)">
-              <v-icon dark> mdi-trash-can-outline </v-icon>
+              <v-icon dark> mdi-trash-can-outline dark </v-icon>
             </v-btn>
             <v-btn
               class="mx-2"
