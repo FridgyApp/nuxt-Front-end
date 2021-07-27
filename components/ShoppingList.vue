@@ -1,18 +1,18 @@
 <template>
-  <v-card 
+  <v-card
     class="mx-auto scroll"
-    width="auto" 
-    max-width="800" 
+    width="auto"
+    max-width="800"
     max-height="550"
     min-width="400"
     min-height="625"
-    overflow-visible>
-    
+    overflow-visible
+  >
     <v-toolbar color="#333" dark>
       <v-spacer></v-spacer>
-        <v-toolbar-title><b>SHOPPING LIST</b></v-toolbar-title>
+      <v-toolbar-title><b>SHOPPING LIST</b></v-toolbar-title>
       <v-spacer></v-spacer>
-      </v-toolbar>
+    </v-toolbar>
     <v-list>
       <v-list-item v-for="(item, i) in listUpdate" :key="i">
         <v-list-item-content>
@@ -59,13 +59,12 @@ export default {
   },
   computed: {
     listUpdate() {
-      return this.list 
-    }
+      return this.list
+    },
   },
   methods: {
     deleteProduct(item) {
-      
-      this.$emit('erase',item.productId._id)
+      this.$emit('erase', item.productId._id)
     },
     editProduct(id){
        this.$emit('editNoteProduct',{id, notes:this.comments})
@@ -75,15 +74,12 @@ export default {
 </script>
 
 <style scoped>
-
 .app_bar {
   max-height: calc(100vh - 64px);
   height: auto;
-
 }
 .scroll {
   overflow-y: scroll;
 }
-
 </style>
 

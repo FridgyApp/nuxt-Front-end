@@ -15,7 +15,7 @@
 
         <v-list>
           <v-list-group
-            v-for="(item,key) in listProduct"
+            v-for="(item, key) in listProduct"
             :key="key"
             v-model="item.active"
             :prepend-icon="item.action"
@@ -44,7 +44,6 @@
       </v-card>
     </v-row>
   </v-container>
-
 </template>
 
 <script>
@@ -55,6 +54,11 @@ export default {
 
   data: () => ({
     items: {
+      'Own Products': {
+        action: 'mdi-account',
+        active: true,
+        items: {},
+      },
       'Fruits & Vegetables': {
         action: 'mdi-fruit-pineapple',
         active: true,
@@ -70,12 +74,12 @@ export default {
         active: true,
         items: {},
       },
-      'Fish': {
+      Fish: {
         action: 'mdi-fish',
         active: true,
         items: {},
       },
-      'Meat': {
+      Meat: {
         action: 'mdi-food-steak',
         active: true,
         items: {},
@@ -100,12 +104,12 @@ export default {
         active: true,
         items: {},
       },
-      'Drinks': {
+      Drinks: {
         action: 'mdi-beer',
         active: true,
         items: {},
       },
-      'Home': {
+      Home: {
         action: 'mdi-spray-bottle',
         active: true,
         items: {},
@@ -125,11 +129,6 @@ export default {
         active: true,
         items: {},
       },
-      'Own Products': {
-        action: 'mdi-account',
-        active: true,
-        items: {},
-      },
     },
   }),
   computed: {
@@ -141,8 +140,8 @@ export default {
 
   methods: {
     addProducts() {
-      this.products.forEach(product =>{
-        if(!this.items[product.category].items[product._id]){
+      this.products.forEach((product) => {
+        if (!this.items[product.category].items[product._id]) {
           this.items[product.category].items[product._id] = product
         }
       })
@@ -155,7 +154,6 @@ export default {
 </script>
 
 <style scoped>
-
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
 
 .scroll {
@@ -169,6 +167,5 @@ export default {
 .app_bar {
   max-height: calc(100vh - 64px);
   height: auto;
-  
 }
 </style>

@@ -1,12 +1,15 @@
 <template>
   <div>
-    <v-alert prominent type="error">
-      <v-row align="center">
-        <v-col class="grow">
-          First of all, why don't you create a group
-        </v-col>
+    <v-alert
+      color="cyan"
+      border="left"
+      elevation="2"
+      colored-border
+      icon="mdi-bulletin-board"
+      ><v-row align="center">
+        <v-col class="grow"> First of all, why don't you start by creating a group? </v-col>
         <v-col class="shrink">
-          <FormAddGroup />
+          <FormAddGroup @addGroup="createGroup" />
         </v-col>
       </v-row>
     </v-alert>
@@ -14,5 +17,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    async createGroup(name) {
+      try {
+        const user = await this.$axios.$post('api/group', { name, members: [] })
+        console.log(user)
+        await this.$auth.setUser(user)
+        this.$nuxt.refresh()
+      } catch (error) {
+        console.log('Can not create group')
+      }
+    },
+  },
+}
 </script>

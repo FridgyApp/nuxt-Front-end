@@ -9,9 +9,9 @@
 
         <v-spacer></v-spacer>
         <v-btn
-          class="navBar-Button mx-3 rounded-pill"
           v-for="(item, i) in items"
           :key="i"
+          class="navBar-Button mx-3 rounded-pill"
           :to="item.to"
           exact
           elevation="2"
@@ -28,10 +28,9 @@
 
         <v-btn
           class="navBar-Button mx-3 rounded-pill"
-          @click="logoutSesion"
-          elevation="2"
-          color="#666"
-        >
+          elevation="2" 
+          color="#666" 
+          @click="logoutSesion">
           <v-icon>mdi-logout</v-icon>
           Logout
         </v-btn>
@@ -71,7 +70,12 @@
     <v-footer class="footer" color="grey darken-4" padless app>
       <v-row justify="center" no-gutters>
         <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Fridge.App</strong>
+          {{ new Date().getFullYear() }} — <strong>Fridg.App</strong> — by Bruno
+          Aggierni <a href="https://www.linkedin.com/in/bruno-aggierni/"><v-icon color="blue">mdi-linkedin</v-icon
+          ></a>, Álvaro Poncio <a href="https://www.linkedin.com/in/alvaro-poncio/"><v-icon color="blue"
+            >mdi-linkedin</v-icon
+          ></a>, Adrian Duran <a href="https://www.linkedin.com/in/adrian-duran-gomez/"><v-icon color="blue">mdi-linkedin</v-icon
+          ></a>
         </v-col>
       </v-row>
     </v-footer>
