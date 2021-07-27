@@ -4,12 +4,11 @@
       v-model="dialog"
       persistent
       max-width="600px"
+      transition="fab-transition"
     >
       <template #activator="{ on, attrs }">
         <v-btn
-          class="rounded-pill mx-2"
-          color="#333"
-          dark
+          plain
           v-bind="attrs"
           v-on="on"
         >
@@ -18,7 +17,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">ADD USER GROUP</span>
+          <span class="text-h5">Add User in Group</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -37,14 +36,14 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="blue darken-1"
+            color="#666"
             text
             @click="dialog = false"
           >
             Close
           </v-btn>
           <v-btn
-            color="blue darken-1"
+            color="#666"
             text
             @click="addUserGroup"
           >
@@ -70,4 +69,10 @@
     },
   }
 </script>
+
+<style scoped>
+.text-h5 {
+  font-family: 'Dosis', sans-serif !important
+}
+</style>
 
