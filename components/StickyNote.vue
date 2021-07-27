@@ -1,11 +1,12 @@
 <template>
+<v-hover v-slot="{ hover }">
   <v-card class="mx-auto mx-4" max-width="400" min-width="200" min-height="120">
     <v-card-title
       >{{ note.name }}
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template #activator="{ on, attrs }">
-          <v-icon  v-bind="attrs" v-on="on" 
+          <v-icon :color="hover?'grey darken-2':'transparent'"  v-bind="attrs" v-on="on" 
             >mdi-square-edit-outline</v-icon
           >
         </template>
@@ -43,7 +44,7 @@
           </v-card-actions>
         </v-card> 
       </v-dialog>
-        <v-icon @click="eraseNote(note._id)"
+        <v-icon :color="hover?'grey darken-2':'transparent'" @click="eraseNote(note._id)"
         >mdi-trash-can-outline</v-icon
       ></v-card-title
     >
@@ -51,6 +52,7 @@
       <div>{{ note.description }}</div>
     </v-card-text>
   </v-card>
+</v-hover>
 </template>
 
 <script>
