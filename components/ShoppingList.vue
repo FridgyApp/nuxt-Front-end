@@ -31,7 +31,7 @@
               small
               color="primary"
               @click="deleteProduct(item)">
-              <v-icon dark> mdi-trash-can-outline </v-icon>
+              <v-icon dark> mdi-trash-can-outline dark </v-icon>
             </v-btn>
             </v-list-item-action>
       </v-list-item>

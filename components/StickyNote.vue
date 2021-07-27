@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto mx-4" max-width="200">
+  <v-card class="mx-auto mx-4" max-width="400" min-width="200" min-height="120">
     <v-card-title
       >{{ note.name }}
       <v-spacer></v-spacer>
@@ -11,7 +11,7 @@
         </template>
         <v-card>
           <v-card-title>
-            <span class="text-h5">ADD PostIt</span>
+            <span class="text-h5">Add Sticky Note</span>
           </v-card-title>
           <v-card-text>
             <v-container>

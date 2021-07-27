@@ -5,12 +5,12 @@
         class="rounded-pill mx-2" 
         color="#333" 
         dark v-bind="attrs" v-on="on">
-        Add PostIt
+        Add Sticky Note
       </v-btn>
     </template>
     <v-card>
       <v-card-title>
-        <span class="text-h5">ADD PostIt</span>
+        <span class="text-h5">Add Sticky Note</span>
       </v-card-title>
       <v-card-text>
         <v-container>
