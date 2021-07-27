@@ -5,7 +5,10 @@
         <div class="d-flex justify-center align-center py-2">
           <FormAddGroup @addGroup="createGroup" />
           <FormAddPost-It @addPostIt="addPostIt" />
-          <FormAddUserGroup @addUserGroup="addUserGroup" />
+          <FormAddUserGroup @addUserGroup="addUserGroup" />          
+        </div>
+        <div>
+          <GroupModal/>
         </div>
       </v-col>
     </v-row>
@@ -93,7 +96,7 @@ export default {
         await this.$auth.setUser(user)
         this.$nuxt.refresh()
       } catch (error) {
-        console.log('algo paso')
+        console.log('Can not create group')
       }
     },
 
@@ -120,7 +123,7 @@ export default {
     async addUserGroup(email) {
       try {
         const user = await this.$axios.$put(`/api/group`, { email })
-        console.log(user)
+        console.log(user)  
       } catch (error) {
         console.log({ error })
       }
