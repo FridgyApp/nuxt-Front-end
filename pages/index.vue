@@ -5,44 +5,39 @@
         <div class="d-flex justify-center align-center py-2">
           <FormAddGroup @addGroup="createGroup" />
           <FormAddPost-It @addPostIt="addPostIt" />
-          <FormAddUserGroup @addUserGroup="addUserGroup" />          
-        </div>
-        <div>
-          <GroupModal/>
+          <FormAddUserGroup @addUserGroup="addUserGroup" />
         </div>
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-      <v-container fluid>
-        <v-row>
-          <v-col cols="3" class="shoppingList-bg">
-            <ShoppingList
-            v-if="Array.isArray(list)"
-            :list="list"
-              @erase="deleteItem"
-            />
-          </v-col>
-          <v-col cols="6" class="calendar-bg"> 
-            <Calendar v-if="Array.isArray(types)" :types="types" /> 
-          </v-col>
-          <v-col cols="3" class="stickyNote-bg">
-            <v-container>
-              <v-row>
-                <v-col v-for="note in notes" :key="note._id">
-                  <StickyNote
-                    
-                    v-if="Array.isArray(notes)" 
-                    :note="note"
-                    @delete="deleteNote"
-                    @edit="editNote"
-                  ></StickyNote>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-col>      
-        </v-row>
-      </v-container>
+      <v-col >
+        <v-container v-if="Array.isArray(list)" fluid>
+          <v-row>
+            <v-col cols="3" class="shoppingList-bg">
+              <ShoppingList :list="list" @erase="deleteItem" />
+            </v-col>
+            <v-col cols="6" class="calendar-bg">
+              <Calendar :types="types" />
+            </v-col>
+            <v-col cols="3" class="stickyNote-bg">
+              <v-container>
+                <v-row>
+                  <v-col v-for="note in notes" :key="note._id">
+                    <StickyNote
+                      :note="note"
+                      @delete="deleteNote"
+                      @edit="editNote"
+                    ></StickyNote>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-col>
+          </v-row>
+        </v-container>
+        <v-container v-else       d-flex
+      justify-space-around>
+          <GroupModal />
+        </v-container>
       </v-col>
     </v-row>
   </v-container>
@@ -123,7 +118,7 @@ export default {
     async addUserGroup(email) {
       try {
         const user = await this.$axios.$put(`/api/group`, { email })
-        console.log(user)  
+        console.log(user)
       } catch (error) {
         console.log({ error })
       }

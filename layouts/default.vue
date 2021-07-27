@@ -10,10 +10,10 @@
 
         <v-spacer></v-spacer>
         <v-btn
-          class="navBar-Button mx-3 rounded-pill"
- 
           v-for="(item, i) in items"
+ 
           :key="i"
+          class="navBar-Button mx-3 rounded-pill"
           :to="item.to"
           exact
           elevation="2"
@@ -30,9 +30,9 @@
         
         <v-btn 
           class="navBar-Button mx-3 rounded-pill"
-          @click="logoutSesion" 
           elevation="2" 
-          color="#666">
+          color="#666" 
+          @click="logoutSesion">
           <v-icon>mdi-logout</v-icon>
           Logout
         </v-btn>
@@ -73,7 +73,7 @@
     <v-footer class="footer" color="grey darken-4" padless app>
       <v-row justify="center" no-gutters>
         <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Fridge.App</strong>
+          {{ new Date().getFullYear() }} — <strong>Fridg.App</strong>
         </v-col>
       </v-row>
     </v-footer>
@@ -106,16 +106,15 @@ export default {
       ],
     }
   },
+  created () {
+    this.$nuxt.$on('infoGroup', (name) => {
+     this.nameGroup = name
+   })
+  },
   methods: {
     async logoutSesion() {
       await this.$auth.logout()
     }
-  },
-  created () {
-    this.$nuxt.$on('infoGroup', (name) => {
-     this.nameGroup = name
-     console.log('hola')
-   })
   },
   
 }

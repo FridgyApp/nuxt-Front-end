@@ -1,14 +1,14 @@
 <template>
   <div class="text-center">
     <v-menu offset-y>
-      <template v-slot:activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
         <v-btn
           class="navBar-Button mx-3 rounded-pill"
           color="#666"
           dark
           v-bind="attrs"
-          v-on="on"
-          elevation="2" 
+          elevation="2"
+          v-on="on" 
         >
         <v-icon>mdi-account-multiple</v-icon>
          Group
@@ -32,7 +32,7 @@
     data: () => ({
       items: [
         { title: 'Members' },
-        { title: 'Add User in Group' },
+        { title: 'Add User to your Group' },
        
       ],
     }),
