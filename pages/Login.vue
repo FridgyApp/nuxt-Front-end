@@ -73,12 +73,16 @@ export default {
     async validate() {
       this.$refs.form.validate()
       if (this.password !== '' && this.email !== '') {
-        await this.$auth.loginWith('local', {
-          data: {
-            email: this.email,
-            password: this.password,
-          },
-        })
+        try {
+          await this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          })
+        } catch (error) {
+          console.log({error})
+        }
       }
     },
   },

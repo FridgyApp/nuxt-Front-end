@@ -49,7 +49,7 @@ export default {
   middleware: 'auth',
   async asyncData({ $axios, $auth }) {
     const [products, list] = await Promise.all([
-      $axios.$get(`/api/products/${$auth.user.user.group}`),
+      $axios.$get(`/api/products/${$auth.user.group}`),
       $axios.$get('/api/shoppingList/'),
     ])
     return { products, list }

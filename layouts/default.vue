@@ -6,7 +6,7 @@
         <img src="../static/logo-blanco.png"
           width="180px">
         <v-spacer></v-spacer>
-        <v-toolbar-title>La Casa de Pepe</v-toolbar-title>
+        <v-toolbar-title>{{nameGroup}}</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn
@@ -82,12 +82,9 @@
 
 <script>
 export default {
-  asyncData({$auth}){
-    console.log($auth.$storage)
-    return {nameGroup: $auth.nameGroup}
-  },
   data() {
     return {
+      nameGroup:'',
       drawer: false,
       group: null,
       items: [
@@ -114,6 +111,13 @@ export default {
       await this.$auth.logout()
     }
   },
+  created () {
+    this.$nuxt.$on('infoGroup', (name) => {
+     this.nameGroup = name
+     console.log('hola')
+   })
+  },
+  
 }
 </script>
 

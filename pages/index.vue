@@ -48,32 +48,55 @@
 <script>
 export default {
   middleware: 'auth',
-async asyncData({ $axios }) {
-    const [list, notes, events] = await Promise.all([
-      $axios.$get('/api/shoppingList/'),
-      $axios.$get('/api/stickynotes/'),
-      $axios.$get('/api/events'),
-    ])
-    if (Array.isArray(events)) {
-      const types = events.map((event) => {
+  async asyncData({ $axios }) {
+    try {
+      const {
+        name,
+        members,
+        shoppingList: list,
+        stickyNotes: notes,
+        events,
+      } = await $axios.$get('/api/group')
+      if (name) {
+        const types = events.map((event) => {
+          return {
+            ...event,
+            start: new Date(event.start).getTime(),
+            end: new Date(event.end).getTime(),
+          }
+        })
         return {
-          ...event,
-          start: new Date(event.start).getTime(),
-          end: new Date(event.end).getTime(),
+          list,
+          notes,
+          types,
+          name,
+          members,
         }
-      })
-      return { list, notes, types }
-    }
-    return { list, notes, types:events }
+      }
+      return {
+        list,
+        notes,
+        types: events,
+        name,
+        members,
+      }
+    } catch (error) {}
+  },
+  mounted() {
+    this.$nuxt.$emit('infoGroup', this.name)
   },
   methods: {
     async createGroup(name) {
       try {
-        await this.$axios.$post('api/group', { name, members: [] })
+        const user = await this.$axios.$post('api/group', { name, members: [] })
+        console.log(user)
+        await this.$auth.setUser(user)
+        this.$nuxt.refresh()
       } catch (error) {
         console.log('algo paso')
       }
     },
+
     async deleteItem(id) {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
     },

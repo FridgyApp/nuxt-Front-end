@@ -64,10 +64,10 @@
             :activator="selectedElement"
             offset-x
           >
-            <v-card color="grey lighten-4" min-width="350px" flat>
+            <v-card v-if="vista" color="grey lighten-4" min-width="350px" flat>
               <v-toolbar :color="selectedEvent.color" dark>
                 <v-btn icon>
-                  <v-icon>mdi-pencil</v-icon>
+                  <v-icon @click="vista=false">mdi-pencil</v-icon>
                 </v-btn>
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
@@ -79,6 +79,28 @@
                 <span v-html="selectedEvent.details"></span>
               </v-card-text>
               <v-card-text>{{ selectedEvent.name }}</v-card-text>
+              <v-card-actions>
+                <v-btn text color="secondary" @click="selectedOpen = false">
+                  Cancel
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+
+            <v-card v-else color="grey lighten-4" min-width="350px" flat>
+              <v-toolbar :color="selectedEvent.color" dark>
+                <v-btn icon>
+                  <v-icon @click="vista=true" >mdi-pencil</v-icon>
+                </v-btn>
+                <input type="text">
+                <v-spacer></v-spacer>
+                <v-btn icon @click="deleteEvent">
+                  <v-icon>mdi-trash-can-outline</v-icon>
+                </v-btn>
+              </v-toolbar>
+              <v-card-text>
+                <input type="text">
+              </v-card-text>
+              <input type="text">
               <v-card-actions>
                 <v-btn text color="secondary" @click="selectedOpen = false">
                   Cancel
@@ -98,6 +120,7 @@ export default {
     types: Array,
   },
   data: () => ({
+    vista:true,
     focus: '',
     type: 'month',
     typeToLabel: {
@@ -152,10 +175,10 @@ export default {
 
       nativeEvent.stopPropagation()
     },
-    deleteEvent(){
-      this.$emit('deleteEvent',this.selectedEvent._id)
+    deleteEvent() {
+      this.$emit('deleteEvent', this.selectedEvent._id)
       this.selectedOpen = false
-    }
+    },
   },
 }
 </script>
