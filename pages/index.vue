@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class=" bgcolor prueba">
+  <v-container fluid fill-height class=" bgcolor prueba">
     <v-row>
       <v-col>
         <v-container v-if="Array.isArray(list)" fluid>

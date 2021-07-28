@@ -2,40 +2,50 @@
   <v-app>
     <div class="overflow-hidden">
       <v-app-bar class="navBar" dark app>
-        <v-app-bar-nav-icon @click="drawer = true" class="d-md-none"></v-app-bar-nav-icon>
-        <img src="../static/logo-blanco.png" width="180px" />
-        
-        <v-toolbar-title>{{ name }}</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-        <v-btn
-          v-for="(item, i) in items"
-          :key="i"
-          class="navBar-Button mx-3 rounded-pill d-sm-none d-md-flex"
-          :to="item.to"
-          exact
-          elevation="2"
-          color="#ffba01"
-          light
-        >
-          <v-icon>{{ item.icon }}</v-icon>
-          {{ item.title }}
-        </v-btn>
-        <v-spacer></v-spacer>
-        <div>
-          <GroupsButton @updatename="updatename" @addUserGroup="addUserGroup" />
-        </div>
-
-        <v-btn
-          class="navBar-Button mx-3 rounded-pill"
-          elevation="2"
-          color="#666"
-          @click="logoutSesion"
-        >
-          <v-icon>mdi-logout</v-icon>
-          Logout
-        </v-btn>
+        <v-container fluid>
+          <v-row>
+            <v-col cols="4" class="d-flex align-center">
+              <v-app-bar-nav-icon
+                @click="drawer = true"
+                class="d-md-none"
+              ></v-app-bar-nav-icon>
+              <img src="../static/logo-blanco.png" width="180px" />
+              <v-toolbar-title class="ml-8">{{ name }}</v-toolbar-title>
+            </v-col>
+            <v-col cols="4" class="d-flex align-center">
+              <v-btn
+                v-for="(item, i) in items"
+                :key="i"
+                class="navBar-Button mx-3 rounded-pill d-sm-none d-md-flex"
+                :to="item.to"
+                exact
+                elevation="2"
+                color="#ffba01"
+                light
+              >
+                <v-icon>{{ item.icon }}</v-icon>
+                {{ item.title }}
+              </v-btn>
+            </v-col>
+            <v-col cols="4" class="d-flex justify-end align-center">
+              <GroupsButton
+                @updatename="updatename"
+                @addUserGroup="addUserGroup"
+              />
+              <v-btn
+                class="navBar-Button mx-3 rounded-pill"
+                elevation="2"
+                color="#666"
+                @click="logoutSesion"
+              >
+                <v-icon>mdi-logout</v-icon>
+                Logout
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-app-bar>
+
       <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list nav dense>
           <v-list-item-group v-model="group" active-class="amber lighten-2">
@@ -91,7 +101,7 @@
 
 <script>
 export default {
-  name:"defaultLayout",
+  name: 'defaultLayout',
   data() {
     return {
       name: '',
@@ -130,9 +140,9 @@ export default {
         console.log({ error })
       }
     },
-    updatename(name){
+    updatename(name) {
       this.name = name
-    }
+    },
   },
 }
 </script>
@@ -142,15 +152,14 @@ export default {
 #app {
   font-family: 'Dosis', sans-serif;
 }
-.bg-main{
-  background-color: #FFD96F;
+.bg-main {
+  background-color: #ffd96f;
 }
 .white {
   color: #fff;
 }
-.footer {  
+.footer {
   bottom: 0;
   width: 100%;
 }
-
 </style>
