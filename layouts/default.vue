@@ -1,17 +1,17 @@
 <template>
   <v-app>
     <div class="overflow-hidden">
-      <v-app-bar class="navBar" dark>
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-app-bar class="navBar" dark app>
+        <v-app-bar-nav-icon @click="drawer = true" class="d-md-none"></v-app-bar-nav-icon>
         <img src="../static/logo-blanco.png" width="180px" />
         <v-spacer></v-spacer>
-        <v-toolbar-title>{{ nameGroup }}</v-toolbar-title>
+        <v-toolbar-title>{{ name }}</v-toolbar-title>
 
         <v-spacer></v-spacer>
         <v-btn
           v-for="(item, i) in items"
           :key="i"
-          class="navBar-Button mx-3 rounded-pill"
+          class="navBar-Button mx-3 rounded-pill d-sm-none d-md-flex"
           :to="item.to"
           exact
           elevation="2"
@@ -23,14 +23,15 @@
         </v-btn>
         <v-spacer></v-spacer>
         <div>
-          <GroupsButton :members="members" />
+          <GroupsButton @updatename="updatename" @addUserGroup="addUserGroup" />
         </div>
 
         <v-btn
           class="navBar-Button mx-3 rounded-pill"
-          elevation="2" 
-          color="#666" 
-          @click="logoutSesion">
+          elevation="2"
+          color="#666"
+          @click="logoutSesion"
+        >
           <v-icon>mdi-logout</v-icon>
           Logout
         </v-btn>
@@ -64,18 +65,24 @@
         </v-list>
       </v-navigation-drawer>
     </div>
+
     <v-main class="bg-main">
       <Nuxt />
     </v-main>
-    <v-footer class="footer" color="grey darken-4" padless app>
+    <v-footer class="footer" color="grey darken-4" padless>
       <v-row justify="center" no-gutters>
         <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} — <strong>Fridg.App</strong> — by Bruno
-          Aggierni <a href="https://www.linkedin.com/in/bruno-aggierni/"><v-icon color="blue">mdi-linkedin</v-icon
-          ></a>, Álvaro Poncio <a href="https://www.linkedin.com/in/alvaro-poncio/"><v-icon color="blue"
-            >mdi-linkedin</v-icon
-          ></a>, Adrian Duran <a href="https://www.linkedin.com/in/adrian-duran-gomez/"><v-icon color="blue">mdi-linkedin</v-icon
-          ></a>
+          Aggierni
+          <a href="https://www.linkedin.com/in/bruno-aggierni/"
+            ><v-icon color="blue">mdi-linkedin</v-icon></a
+          >, Álvaro Poncio
+          <a href="https://www.linkedin.com/in/alvaro-poncio/"
+            ><v-icon color="blue">mdi-linkedin</v-icon></a
+          >, Adrian Duran
+          <a href="https://www.linkedin.com/in/adrian-duran-gomez/"
+            ><v-icon color="blue">mdi-linkedin</v-icon></a
+          >
         </v-col>
       </v-row>
     </v-footer>
@@ -86,6 +93,7 @@
 export default {
   data() {
     return {
+      name: '',
       members: [],
       nameGroup: '',
       drawer: false,
@@ -109,18 +117,22 @@ export default {
       ],
     }
   },
-    created() {
-    this.$nuxt.$on('infoGroup', ({name, members}) => {
-      this.nameGroup = name
-      this.members = members;
-    })
-  },
   methods: {
     async logoutSesion() {
       await this.$auth.logout()
     },
+    async addUserGroup(email) {
+      try {
+        const user = await this.$axios.$put(`/api/group`, { email })
+        this.members.unshift(user)
+      } catch (error) {
+        console.log({ error })
+      }
+    },
+    updatename(name){
+      this.name = name
+    }
   },
-
 }
 </script>
 
@@ -129,13 +141,15 @@ export default {
 #app {
   font-family: 'Dosis', sans-serif;
 }
-
+.navBar{
+  display: block;
+}
 .white {
   color: #fff;
 }
-.footer {
-  position: fixed;
+.footer {  
   bottom: 0;
   width: 100%;
 }
+
 </style>

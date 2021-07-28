@@ -89,8 +89,7 @@ export default {
     },
     async editNoteProduct({id, notes}){
        try {
-        const hola = await this.$axios.$put(`/api/shoppingList/${id}`,{notes})
-        console.log(hola)
+        await this.$axios.$put(`/api/shoppingList/${id}`,{notes})
       } catch (error) {}
     }
   },

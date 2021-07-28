@@ -3,9 +3,9 @@
     class="mx-auto scroll"
     width="auto"
     max-width="800"
-    max-height="550"
-    min-width="400"
-    min-height="625"
+    max-height="250"
+    min-width="200"
+    min-height="525"
     overflow-visible
   >
     <v-toolbar color="#333" dark>
@@ -18,8 +18,7 @@
         <v-list-item-content>
           <v-list-item-title v-text="item.productId.name"></v-list-item-title>
           <v-form>
-            <v-text-field v-model="comments" :value="item.notes" label="Comments"  ></v-text-field>
-
+            <v-text-field :id="item._id" :value="item.notes" label="Comments"  ></v-text-field>
           </v-form>
         </v-list-item-content>
             <v-list-item-action>
@@ -67,7 +66,8 @@ export default {
       this.$emit('erase', item.productId._id)
     },
     editProduct(id){
-       this.$emit('editNoteProduct',{id, notes:this.comments})
+      const product = document.getElementById(`${id}`).value
+       this.$emit('editNoteProduct',{id, notes:product})
     }
   },
 }

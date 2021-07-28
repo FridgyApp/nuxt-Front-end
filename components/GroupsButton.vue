@@ -19,7 +19,7 @@
         <v-list-item v-for="(item, index) in items" :key="index">
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
-        <v-btn plain><FormAddUserGroup /></v-btn>
+        <v-btn plain><FormAddUserGroup @addUserGroup="addUserGroup" /></v-btn>
 
         <!-- <v-list-item
           v-for="(item, index) in items"
@@ -34,22 +34,25 @@
 
 <script>
 export default {
-  props: {
-    members: Array,
+
+  async fetch() {
+    const {members, name} = await this.$axios.$get('/api/group')
+    this.members = members
+    this.$emit('updatename', name)
   },
   data: () => ({
     dialog: false,
-    email: '',
-    items: [],
+    members: []
   }),
-  mounted() {
-    // this.items.members.push( { title: 'Add User in Group' })
-    this.items = this.members
-    this.items.push({ name: 'Add User in Group' })
+  computed: {
+    items() {
+      return this.members.concat({ name: 'Add User in Group' })
+    }
   },
   methods: {
-    addUserGroup() {
-      this.$emit('addUserGroup', this.email)
+    addUserGroup(email) {
+
+      this.$emit('addUserGroup',email)
       this.dialog = false
       this.email = ''
     },

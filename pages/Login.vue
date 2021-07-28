@@ -72,14 +72,14 @@ export default {
   data: () => ({
     show1: false,
     valid: true,
-    password: '',
+    password: '123456',
     loginError: false,
     errorMessage: '',
     passwordRules: [
       (v) => !!v || 'Password is required',
       (v) => (v && v.length >= 6) || 'Name must be less than 6 characters',
     ],
-    email: '',
+    email: 'duranadria99@gmail.com',
 
     emailRules: [
       (v) => !!v || 'E-mail is required',

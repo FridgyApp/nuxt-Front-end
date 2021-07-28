@@ -1,23 +1,35 @@
 <template>
-  <v-container fluid>
-    <v-row class="px-4">
-      <v-col cols="12" class="d-flex justify-end mb-2">
-        <div class="d-flex justify-center align-center py-2">
-          <FormAddPost-It @addPostIt="addPostIt" />
-        </div>
-      </v-col>
-    </v-row>
+  <v-container fluid class=" bgcolor prueba">
     <v-row>
       <v-col>
         <v-container v-if="Array.isArray(list)" fluid>
           <v-row>
-            <v-col cols="3" class="shoppingList-bg">
+            <v-col
+              xl="12"
+              md="6"
+              lg="3"
+              class="shoppingList-bg order-xs-2 order-sm-1 order-lg-0"
+            >
               <ShoppingList :list="list" @erase="deleteItem" />
             </v-col>
-            <v-col cols="6" class="calendar-bg">
-              <Calendar :types="types" />
+            <v-col
+              xl="12"
+              md="12"
+              lg="6"
+              class="calendar-bg order-xs-1 order-sm-3 order-lg-1"
+            >
+              <Calendar
+                @deleteEvent="deleteEvent"
+                @editEvent="editEvent"
+                :types="types"
+              />
             </v-col>
-            <v-col cols="3" class="stickyNote-bg">
+            <v-col
+              xl="12"
+              md="6"
+              lg="3"
+              class="stickyNote-bg order-xs-0 order-sm-0 order-lg-2"
+            >
               <v-container>
                 <v-row>
                   <v-col v-for="note in notes" :key="note._id">
@@ -46,11 +58,15 @@
 <script>
 export default {
   middleware: 'auth',
+  data() {
+    return {
+      list: [],
+    }
+  },
   async asyncData({ $axios }) {
     try {
       const {
         name,
-        members,
         shoppingList: list,
         stickyNotes: notes,
         events,
@@ -67,21 +83,14 @@ export default {
           list,
           notes,
           types,
-          name,
-          members,
         }
       }
       return {
         list,
         notes,
         types: events,
-        name,
-        members,
       }
     } catch (error) {}
-  },
-  mounted() {
-    this.$nuxt.$emit('infoGroup', { name: this.name, members: this.members })
   },
   methods: {
     async createGroup(name) {
@@ -93,6 +102,11 @@ export default {
         console.log('Can not create group')
       }
     },
+    async editNoteProduct({ id, notes }) {
+      try {
+        await this.$axios.$put(`/api/shoppingList/${id}`, { notes })
+      } catch (error) {}
+    },
 
     async deleteItem(id) {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
@@ -101,7 +115,6 @@ export default {
       this.notes = await this.$axios.$delete(`/api/stickynotes/${id}`, {})
     },
     async editNote(note) {
-      console.log('holaaaaaaa', note)
       const modifiedNote = await this.$axios.$put(
         `/api/stickynotes/${note._id}`,
         { note }
@@ -123,6 +136,31 @@ export default {
         console.log({ error })
       }
     },
+        async deleteEvent(id) {
+      try {
+        await this.$axios.$delete(`/api/events/${id}`)
+        
+        this.types = this.types.filter((event) => event._id !== id)
+        console.log(this.types)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async editEvent({ id, ...event }) {
+      try {
+        const eventUpdate = await this.$axios.$put(`/api/events/${id}`, event)
+        console.log(eventUpdate, event)
+        eventUpdate.start = new Date(event.start).getTime()
+        eventUpdate.end = new Date(event.end).getTime()
+        this.types = await this.types.map((ev) => {
+          if (ev._id === eventUpdate._id) {
+            console.log('entre')
+            return eventUpdate
+          }
+          return ev
+        })
+      } catch (error) {}
+    },
   },
 }
 </script>
@@ -133,12 +171,17 @@ export default {
   width: 100%;
   min-height: 700px;
 }
-
+.bgcolor{
+  background-color: #ffba01
+}
 .calendar-bg {
   background-color: #ffba01;
 }
 
 .shoppingList-bg {
   background-color: #666;
+}
+.prueba{
+  height: 100%;
 }
 </style>
