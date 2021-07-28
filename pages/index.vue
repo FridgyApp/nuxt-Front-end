@@ -49,7 +49,7 @@
           </v-row>
         </v-container>
         <v-container v-else d-flex justify-space-around>
-          <GroupModal />
+          <GroupModal @refreshGroup="refreshGroup" />
         </v-container>
       </v-col>
     </v-row>
@@ -97,20 +97,12 @@ export default {
     this.$nuxt.$emit('infoGroup',{ name:this.name, members:this.members})
   },
   methods: {
-    async createGroup(name) {
-      try {
-        const user = await this.$axios.$post('api/group', { name, members: [] })
-        await this.$auth.setUser(user)
-        this.$nuxt.refresh()
-      } catch (error) {
-        console.log('Can not create group')
-      }
-    },
     async editNoteProduct({ id, notes }) {
       try {
         await this.$axios.$put(`/api/shoppingList/${id}`, { notes })
       } catch (error) {}
     },
+
 
     async deleteItem(id) {
       this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
@@ -134,18 +126,15 @@ export default {
     },
     async addUserGroup(email) {
       try {
-        const user = await this.$axios.$put(`/api/group`, { email })
-        console.log(user)
+        await this.$axios.$put(`/api/group`, { email })
       } catch (error) {
         console.log({ error })
       }
     },
         async deleteEvent(id) {
       try {
-        await this.$axios.$delete(`/api/events/${id}`)
-        
+        await this.$axios.$delete(`/api/events/${id}`)      
         this.types = this.types.filter((event) => event._id !== id)
-        console.log(this.types)
       } catch (error) {
         console.log(error)
       }
@@ -153,12 +142,10 @@ export default {
     async editEvent({ id, ...event }) {
       try {
         const eventUpdate = await this.$axios.$put(`/api/events/${id}`, event)
-        console.log(eventUpdate, event)
         eventUpdate.start = new Date(event.start).getTime()
         eventUpdate.end = new Date(event.end).getTime()
         this.types = await this.types.map((ev) => {
           if (ev._id === eventUpdate._id) {
-            console.log('entre')
             return eventUpdate
           }
           return ev

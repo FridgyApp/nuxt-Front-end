@@ -139,7 +139,6 @@ export default {
       await this.$auth.logout()
     },
     async addUserGroup(email) {
-      console.log(email)
       try {
         const user = await this.$axios.$put(`/api/group`, { email })
         this.members.unshift(user)

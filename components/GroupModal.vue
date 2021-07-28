@@ -22,9 +22,9 @@ export default {
     async createGroup(name) {
       try {
         const user = await this.$axios.$post('api/group', { name, members: [] })
-        console.log(user)
         await this.$auth.setUser(user)
         this.$nuxt.refresh()
+        location. reload()
       } catch (error) {
         console.log('Can not create group')
       }
