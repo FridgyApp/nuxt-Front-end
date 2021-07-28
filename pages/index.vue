@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-0" heigh="100%">
+  <v-container fluid class="pa-0">
     <v-row>
       <v-col>
         <v-container v-if="Array.isArray(list)" fluid>
@@ -124,15 +124,16 @@ export default {
 <style scoped>
 .stickyNote-bg {
   background-color: #666;
-  width: 100%;
-  min-height: 700px;
+  
 }
 
 .calendar-bg {
   background-color: #ffba01;
+  
 }
 
 .shoppingList-bg {
   background-color: #666;
+  
 }
 </style>
