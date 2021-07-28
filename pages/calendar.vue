@@ -1,7 +1,7 @@
 <template>
-  <v-container class="calendar-wr" fill-height>
+  <v-container class="calendar-wr">
     <v-row>
-      <v-col cols="12" class="d-flex justify-end">
+      <v-col cols="12" class="d-flex justify-end mt-3">
         <FormEvent @addEvent="addEvent" />
       </v-col>
 
@@ -71,9 +71,9 @@ export default {
 
 <style scoped>
 .calendar-bg {
-  background-color: #ffba01;
+  background-color: #FFD96F;
 }
 .calendar-wr {
-  background-color: #ffba01;
+  background-color: #FFD96F;
 }
 </style>

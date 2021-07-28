@@ -1,8 +1,6 @@
 <template>
-  <v-container fluid>
-    <v-row no-gutters>
       <v-card
-        class="mx-auto scroll"
+        class="mx-auto"
         width="700"
         max-height="550"
         overflow-visible
@@ -13,7 +11,7 @@
           <v-spacer></v-spacer>
         </v-app-bar>
 
-        <v-list>
+        <v-list class="scroll" max-height="500">
           <v-list-group
             v-for="(item, key) in listProduct"
             :key="key"
@@ -42,8 +40,6 @@
           </v-list-group>
         </v-list>
       </v-card>
-    </v-row>
-  </v-container>
 </template>
 
 <script>

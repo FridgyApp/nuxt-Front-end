@@ -2,85 +2,95 @@
   <div>
     <v-container>
       <v-row>
-        <div class="logo-login mb-5" >
-          <img src="../static/logo-blanco.png">  
+        <div class="logo-login mb-5">
+          <img src="../static/logo-blanco.png" />
         </div>
       </v-row>
-    </v-container>    
+    </v-container>
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center mb-6 container-login">
           <v-form ref="form" v-model="valid" class="post-it" lazy-validation>
             <v-card class="form-login" rounded>
-             <v-text-field
-              v-model="username"
-              class="rounded-pill" 
-              solo
-              label="Username" 
-              required
-               ></v-text-field>
-             <v-text-field
-              v-model="email"
-              class="rounded-pill"
-              solo
-              :rules="emailRules"
-              label="E-mail"
-              required
+              <v-text-field
+                v-model="username"
+                class="rounded-pill"
+                solo
+                label="Username"
+                required
               ></v-text-field>
-             <v-text-field
-              v-model="password"
-              class="rounded-pill"
-              solo
-              :rules="passwordRules"
-              label="Password"
-              required
-             ></v-text-field>
-             <v-text-field
-              v-model="passwordRepeat"
-              class="rounded-pill"
-              solo
-              label="Confirm Password"
-              required
-             ></v-text-field>
+              <v-text-field
+                v-model="email"
+                class="rounded-pill"
+                solo
+                :rules="emailRules"
+                label="E-mail"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                class="rounded-pill"
+                solo
+                :rules="passwordRules"
+                label="Password"
+                required
+                :type="show1 ? 'text' : 'password'"
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="show1 = !show1"
+                hint="At least 6 characters"
+              ></v-text-field>
+              <v-text-field
+                v-model="passwordRepeat"
+                class="rounded-pill"
+                solo
+                label="Confirm Password"
+                required
+                @keyup.enter="validate"
+                :type="show2 ? 'text' : 'password'"
+                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="show2 = !show2"
+                hint="At least 6 characters"
+              ></v-text-field>
               <v-btn
-              :disabled="!valid"
-              color="#FFBA01"
-              class="rounded-pill my-1"
-              block
-              @click="validate"
-             >
-              Sign Up
-            </v-btn>
-            <v-btn
-             to="/login" 
-             block plain
-             color="white"
-             > 
-              Exit 
-            </v-btn>
-          </v-card>
-        </v-form>
-      </v-col>
-    </v-row>
-  </v-container>
-  <v-footer class="footer" color="grey darken-4" padless app>
+                :disabled="!valid"
+                color="#FFBA01"
+                class="rounded-pill my-1"
+                block
+                @click="validate"
+              >
+                Sign Up
+              </v-btn>
+              <v-btn to="/login" block plain color="white"> Exit </v-btn>
+            </v-card>
+          </v-form>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-footer class="footer" color="grey darken-4" padless app>
       <v-row justify="center" no-gutters>
         <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} — <strong>Fridg.App</strong> — by Bruno
-          Aggierni <a href="https://www.linkedin.com/in/bruno-aggierni/"><v-icon color="blue">mdi-linkedin</v-icon
-          ></a>, Álvaro Poncio <a href="https://www.linkedin.com/in/alvaro-poncio/"><v-icon color="blue"
-            >mdi-linkedin</v-icon
-          ></a>, Adrian Duran <a href="https://www.linkedin.com/in/adrian-duran-gomez/"><v-icon color="blue">mdi-linkedin</v-icon
-          ></a>
+          Aggierni
+          <a href="https://www.linkedin.com/in/bruno-aggierni/"
+            ><v-icon color="blue">mdi-linkedin</v-icon></a
+          >, Álvaro Poncio
+          <a href="https://www.linkedin.com/in/alvaro-poncio/"
+            ><v-icon color="blue">mdi-linkedin</v-icon></a
+          >, Adrian Duran
+          <a href="https://www.linkedin.com/in/adrian-duran-gomez/"
+            ><v-icon color="blue">mdi-linkedin</v-icon></a
+          >
         </v-col>
       </v-row>
     </v-footer>
-  </div>     
+  </div>
 </template>
 <script>
 export default {
   layout: 'login',
   data: () => ({
+    show1: false,
+    show2: false,
     valid: true,
     username: '',
     password: '',
@@ -123,7 +133,6 @@ export default {
 </script>
 
 <style scoped>
-
 .form-login {
   padding: 2rem;
   background-color: #666;

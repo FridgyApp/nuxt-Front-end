@@ -1,48 +1,53 @@
 <template>
-  <v-container fluid>
+  <v-container class="shopping-bg">
     <v-row>
-      <v-col >
-        <v-container class="justify-center" >
+      <!-- left container -->
+      <v-col cols="6" class="d-flex flex-column justify-center mt-3">
+        <v-container>
           <v-row>
-            <v-col col="6"  class="justify-center mt-3">
-              
-
-                <v-card
-                  class="d-flex flex-column justify-center"
-                  width="auto"
-                  max-width="600"
-                  overflow-visible
-                >
-                <ProductsList :products="products" @moveShopping="addList" />
-                  <v-text-field
-                  v-model="newProduct"
-                    label="Products"
-                    outlined
-                    clearable         
-                  ></v-text-field>
-                  <v-btn
-                    large
-                    color="#ffba01"
-                    light
-                    depressed
-                    @click="newProductList"
-                  >
-                    Add New Product
-                  </v-btn>
-                </v-card>
-              
-            </v-col>  
-          </v-row>    
-        </v-container>
-      </v-col>
-      <v-col>
-        <v-container class="justify-center">
-          <v-row>
-            <v-col cols="6" class="justify-center mt-4">
-              <ShoppingList :list="list" @erase="deleteItem" @editNoteProduct="editNoteProduct" />
+            <v-col class="pa-0">
+              <ProductsList :products="products" @moveShopping="addList" />
+            </v-col>
+            <v-col>
+              <v-container>
+                <v-row class="pt-5">
+                  <v-spacer></v-spacer>
+                  <v-col cols="7" class="d-flex align-center">
+                    <v-text-field
+                      dense
+                      v-model="newProduct"
+                      label="Products"
+                      outlined
+                      solo
+                      clearable
+                      hide-details
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex align-center">
+                    <v-btn
+                      class="rounded-pill align-self-end"
+                      color="#333"
+                      dark
+                      large
+                      @click="newProductList">
+                      <v-icon>mdi-plus</v-icon>
+                      Add New Product
+                    </v-btn>
+                  </v-col>
+                  <v-spacer></v-spacer>
+                </v-row>
+              </v-container>
             </v-col>
           </v-row>
         </v-container>
+      </v-col>
+      <!-- right container -->
+      <v-col cols="6" class="justify-center mt-3">
+        <ShoppingList
+          :list="list"
+          @erase="deleteItem"
+          @editNoteProduct="editNoteProduct"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -87,11 +92,11 @@ export default {
         console.log(error.response.data.message)
       }
     },
-    async editNoteProduct({id, notes}){
-       try {
-        await this.$axios.$put(`/api/shoppingList/${id}`,{notes})
+    async editNoteProduct({ id, notes }) {
+      try {
+        await this.$axios.$put(`/api/shoppingList/${id}`, { notes })
       } catch (error) {}
-    }
+    },
   },
 }
 </script>
@@ -100,5 +105,9 @@ export default {
 .title {
   font-family: 'Raleway', sans-serif !important;
   color: #ffba01;
+}
+
+.shopping-bg {
+  background-color: #ffd96f;
 }
 </style>

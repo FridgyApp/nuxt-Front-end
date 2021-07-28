@@ -172,10 +172,10 @@ export default {
   
 }
 .bgcolor{
-  background-color: #ffba01
+  background-color: #FFD96F
 }
 .calendar-bg {
-  background-color: #ffba01;
+  background-color: #666;
   
 }
 

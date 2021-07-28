@@ -33,6 +33,7 @@
                 counter
                 required
                 @click:append="show1 = !show1"
+                @keyup.enter="validate"
               ></v-text-field>
               <v-btn
                 :disabled="!valid"

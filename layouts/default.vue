@@ -4,7 +4,7 @@
       <v-app-bar class="navBar" dark app>
         <v-app-bar-nav-icon @click="drawer = true" class="d-md-none"></v-app-bar-nav-icon>
         <img src="../static/logo-blanco.png" width="180px" />
-        <v-spacer></v-spacer>
+        
         <v-toolbar-title>{{ name }}</v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -143,7 +143,7 @@ export default {
   font-family: 'Dosis', sans-serif;
 }
 .bg-main{
-  background-color: #ffba01;
+  background-color: #FFD96F;
 }
 .white {
   color: #fff;
