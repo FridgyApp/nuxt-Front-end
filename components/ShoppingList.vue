@@ -3,9 +3,9 @@
     class="mx-auto"
     width="auto"
     max-width="800"
-    max-height="250"
+    max-height="550"
     min-width="200"
-    min-height="525"
+    min-height="125"
     overflow-visible
   >
     <v-toolbar color="#333" dark>
@@ -13,7 +13,7 @@
       <v-toolbar-title><b>SHOPPING LIST</b></v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <v-list class="scroll" min-height="580" max-height="580">
+    <v-list class="scroll" min-height="125" max-height="550">
       <v-list-item v-for="(item, i) in listUpdate" :key="i">
         <v-list-item-content>
           <v-list-item-title v-text="item.productId.name"></v-list-item-title>
@@ -49,7 +49,10 @@
 <script>
 export default {
   props: {
-    list: Array,
+    list:{
+      type:Array,
+      default:()=>{ return []}
+    },
   },
   data() {
     return {
@@ -74,10 +77,6 @@ export default {
 </script>
 
 <style scoped>
-.app_bar {
-  max-height: calc(100vh - 64px);
-  height: auto;
-}
 .scroll {
   overflow-y: scroll;
 }

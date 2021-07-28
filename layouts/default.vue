@@ -12,7 +12,7 @@
               <img src="../static/logo-blanco.png" width="180px" />
               <v-toolbar-title class="ml-8">{{ nameGroup }}</v-toolbar-title>
             </v-col>
-            <v-col v-if="Array.isArray(members)" cols="4" class="d-flex align-center" >
+            <v-col v-if="Array.isArray(members)" cols="4" class="d-flex align-center d-xs-none d-md-flex" >
               <v-btn
                 v-for="(item, i) in items"
                 :key="i"
@@ -27,6 +27,7 @@
                 {{ item.title }}
               </v-btn>
             </v-col>
+            <v-spacer v-if="!Array.isArray(members)"></v-spacer>
             <v-col cols="4" class="d-flex justify-end align-center">
               <GroupsButton
                 v-if="Array.isArray(members)"
@@ -102,7 +103,6 @@
 
 <script>
 export default {
-  name: 'defaultLayout',
   data() {
     return {
       members: [],
@@ -143,7 +143,7 @@ export default {
         const user = await this.$axios.$put(`/api/group`, { email })
         this.members.unshift(user)
       } catch (error) {
-        console.log({ error })
+        this.error = error
       }
     },
     updatename(name) {

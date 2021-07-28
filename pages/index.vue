@@ -1,31 +1,35 @@
 <template>
-  <v-container fluid fill-height class=" bgcolor prueba">
+  <v-container fluid fill-height class=" bgcolor">
     <v-row>
       <v-col>
         <v-container v-if="Array.isArray(list)" fluid>
           <v-row>
             <v-col
-              xl="12"
+              xl="3"
+              sm="12"
               md="6"
               lg="3"
-              class="shoppingList-bg order-xs-2 order-sm-1 order-lg-0"
+        
+              class="shoppingList-bg order-xs-2 order-sm-2 order-lg-0"
             >
               <ShoppingList :list="list" @erase="deleteItem" @editNoteProduct="editNoteProduct" />
             </v-col>
             <v-col
-              xl="12"
+              xl="6"
+              sm="12"
               md="12"
               lg="6"
               class="calendar-bg order-xs-1 order-sm-3 order-lg-1"
             >
               <Calendar
+                :types="types"
                 @deleteEvent="deleteEvent"
                 @editEvent="editEvent"
-                :types="types"
               />
             </v-col>
             <v-col
-              xl="12"
+              xl="3"
+              sm="12"
               md="6"
               lg="3"
               class="stickyNote-bg order-xs-0 order-sm-0 order-lg-2"
@@ -93,9 +97,15 @@ export default {
       }
     } catch (error) {}
   },
+    data() {
+    return {
+      error: ''
+    }
+  },
   mounted() {
     this.$nuxt.$emit('infoGroup',{ name:this.name, members:this.members})
   },
+
   methods: {
     async editNoteProduct({ id, notes }) {
       try {
@@ -128,7 +138,7 @@ export default {
       try {
         await this.$axios.$put(`/api/group`, { email })
       } catch (error) {
-        console.log({ error })
+        
       }
     },
         async deleteEvent(id) {
@@ -136,7 +146,7 @@ export default {
         await this.$axios.$delete(`/api/events/${id}`)      
         this.types = this.types.filter((event) => event._id !== id)
       } catch (error) {
-        console.log(error)
+        this.error = error
       }
     },
     async editEvent({ id, ...event }) {
@@ -150,7 +160,9 @@ export default {
           }
           return ev
         })
-      } catch (error) {}
+      } catch (error) {
+        this.error = error
+      }
     },
   },
 }
@@ -172,8 +184,5 @@ export default {
 .shoppingList-bg {
   background-color: #666;
   
-}
-.prueba{
-  height: 100%;
 }
 </style>

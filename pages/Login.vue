@@ -73,14 +73,14 @@ export default {
   data: () => ({
     show1: false,
     valid: true,
-    password: '123456',
+    password: '',
     loginError: false,
     errorMessage: '',
     passwordRules: [
       (v) => !!v || 'Password is required',
       (v) => (v && v.length >= 6) || 'Name must be less than 6 characters',
     ],
-    email: 'duranadria99@gmail.com',
+    email: '',
 
     emailRules: [
       (v) => !!v || 'E-mail is required',
@@ -103,7 +103,6 @@ export default {
       } catch (error) {
         this.loginError = !this.loginError
         this.errorMessage = error.response.data.msg
-        console.clear()
       }
     },
   },
