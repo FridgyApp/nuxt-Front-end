@@ -16,17 +16,13 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in items" :key="index">
+        <v-btn plain class="ml-2" >
+          USERS IN GROUP
+        </v-btn>
+        <v-list-item  class="ml-5" v-for="(item, index) in items" :key="index">
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
         <v-btn plain><FormAddUserGroup /></v-btn>
-
-        <!-- <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-        >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item> -->
       </v-list>
     </v-menu>
   </div>
@@ -43,9 +39,9 @@ export default {
     items: [],
   }),
   mounted() {
-    // this.items.members.push( { title: 'Add User in Group' })
+    
     this.items = this.members
-    this.items.push({ name: 'Add User in Group' })
+    
   },
   methods: {
     addUserGroup() {
