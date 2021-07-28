@@ -6,12 +6,12 @@
     transition="fab-transition">
     <template #activator="{ on, attrs }">
       <v-btn 
-        class="mx-2" 
+        block
+        x-large 
         color="#FFBA01" 
-        fab
-        dark 
+        light
         v-bind="attrs" v-on="on">
-         Add<v-icon dark>mdi-plus</v-icon>
+         Add Sticky Note<v-icon dark>mdi-plus</v-icon>
         
       </v-btn>
     </template>
@@ -42,10 +42,10 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="#666" text @click="dialog = false">
+        <v-btn color="#F44336" text @click="dialog = false">
           Close
         </v-btn>
-        <v-btn color="#666" text @click="addPostIt"> Save </v-btn>
+        <v-btn color="#4CAF50" text @click="addPostIt"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

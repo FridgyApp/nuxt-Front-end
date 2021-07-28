@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="calendar-style">
     <v-row class="fill-height">
       <v-col>
         <v-sheet height="64">
@@ -209,3 +209,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.calendar-style {
+  background-color: #666;
+  
+}
+</style>
+
+

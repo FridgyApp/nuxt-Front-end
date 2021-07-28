@@ -32,6 +32,9 @@
             >
               <v-container>
                 <v-row>
+                  <v-col>
+                    <FormAddPost-It @addPostIt="addPostIt" />
+                  </v-col>
                   <v-col v-for="note in notes" :key="note._id">
                     <StickyNote
                       :note="note"
@@ -40,9 +43,7 @@
                     ></StickyNote>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <FormAddPost-It @addPostIt="addPostIt" />
-                </v-row>
+                <v-row> </v-row>
               </v-container>
             </v-col>
           </v-row>
@@ -168,18 +169,19 @@ export default {
 <style scoped>
 .stickyNote-bg {
   background-color: #666;
-  width: 100%;
-  min-height: 700px;
+  
 }
 .bgcolor{
   background-color: #ffba01
 }
 .calendar-bg {
   background-color: #ffba01;
+  
 }
 
 .shoppingList-bg {
   background-color: #666;
+  
 }
 .prueba{
   height: 100%;

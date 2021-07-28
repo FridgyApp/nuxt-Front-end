@@ -16,17 +16,13 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in items" :key="index">
+        <v-btn plain class="ml-2" >
+          USERS IN GROUP
+        </v-btn>
+        <v-list-item  class="ml-5" v-for="(item, index) in items" :key="index">
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
         <v-btn plain><FormAddUserGroup @addUserGroup="addUserGroup" /></v-btn>
-
-        <!-- <v-list-item
-          v-for="(item, index) in items"
-          :key="index"
-        >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item> -->
       </v-list>
     </v-menu>
   </div>

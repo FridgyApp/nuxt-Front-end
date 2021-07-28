@@ -91,6 +91,7 @@
 
 <script>
 export default {
+  name:"defaultLayout",
   data() {
     return {
       name: '',
@@ -141,8 +142,8 @@ export default {
 #app {
   font-family: 'Dosis', sans-serif;
 }
-.navBar{
-  display: block;
+.bg-main{
+  background-color: #ffba01;
 }
 .white {
   color: #fff;
