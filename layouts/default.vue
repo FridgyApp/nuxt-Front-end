@@ -84,6 +84,7 @@
 
 <script>
 export default {
+  name:"defaultLayout",
   data() {
     return {
       members: [],

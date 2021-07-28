@@ -1,12 +1,5 @@
 <template>
-  <v-container fluid>
-    <v-row class="px-4">
-      <v-col cols="12" class="d-flex justify-end mb-2">
-        <div class="d-flex justify-center align-center py-2">
-          <FormAddPost-It @addPostIt="addPostIt" />
-        </div>
-      </v-col>
-    </v-row>
+  <v-container fluid class="pa-0" heigh="100%">
     <v-row>
       <v-col>
         <v-container v-if="Array.isArray(list)" fluid>
@@ -20,6 +13,9 @@
             <v-col cols="3" class="stickyNote-bg">
               <v-container>
                 <v-row>
+                  <v-col>
+                    <FormAddPost-It @addPostIt="addPostIt" />
+                  </v-col>
                   <v-col v-for="note in notes" :key="note._id">
                     <StickyNote
                       :note="note"
@@ -28,9 +24,7 @@
                     ></StickyNote>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <FormAddPost-It @addPostIt="addPostIt" />
-                </v-row>
+                <v-row> </v-row>
               </v-container>
             </v-col>
           </v-row>

@@ -24,7 +24,7 @@
                     large
                     color="#ffba01"
                     light
-                    depressed
+                    
                     @click="newProductList"
                   >
                     Add New Product

@@ -6,12 +6,12 @@
     transition="fab-transition">
     <template #activator="{ on, attrs }">
       <v-btn 
-        class="mx-2" 
+        block
+        x-large 
         color="#FFBA01" 
-        fab
-        dark 
+        light
         v-bind="attrs" v-on="on">
-         Add<v-icon dark>mdi-plus</v-icon>
+         Add Sticky Note<v-icon dark>mdi-plus</v-icon>
         
       </v-btn>
     </template>
