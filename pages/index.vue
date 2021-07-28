@@ -10,7 +10,7 @@
               lg="3"
               class="shoppingList-bg order-xs-2 order-sm-1 order-lg-0"
             >
-              <ShoppingList :list="list" @erase="deleteItem" />
+              <ShoppingList :list="list" @erase="deleteItem" @editNoteProduct="editNoteProduct" />
             </v-col>
             <v-col
               xl="12"
@@ -59,15 +59,11 @@
 <script>
 export default {
   middleware: 'auth',
-  data() {
-    return {
-      list: [],
-    }
-  },
-  async asyncData({ $axios }) {
+   async asyncData({ $axios }) {
     try {
       const {
         name,
+        members,
         shoppingList: list,
         stickyNotes: notes,
         events,
@@ -84,14 +80,21 @@ export default {
           list,
           notes,
           types,
+          name,
+          members,
         }
       }
       return {
         list,
         notes,
         types: events,
+        name,
+        members,
       }
     } catch (error) {}
+  },
+  mounted() {
+    this.$nuxt.$emit('infoGroup',{ name:this.name, members:this.members})
   },
   methods: {
     async createGroup(name) {

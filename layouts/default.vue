@@ -6,13 +6,13 @@
           <v-row>
             <v-col cols="4" class="d-flex align-center">
               <v-app-bar-nav-icon
-                @click="drawer = true"
                 class="d-md-none"
+                @click="drawer = true"
               ></v-app-bar-nav-icon>
               <img src="../static/logo-blanco.png" width="180px" />
-              <v-toolbar-title class="ml-8">{{ name }}</v-toolbar-title>
+              <v-toolbar-title class="ml-8">{{ nameGroup }}</v-toolbar-title>
             </v-col>
-            <v-col cols="4" class="d-flex align-center">
+            <v-col v-if="Array.isArray(members)" cols="4" class="d-flex align-center" >
               <v-btn
                 v-for="(item, i) in items"
                 :key="i"
@@ -29,7 +29,8 @@
             </v-col>
             <v-col cols="4" class="d-flex justify-end align-center">
               <GroupsButton
-                @updatename="updatename"
+                v-if="Array.isArray(members)"
+                :members="members"
                 @addUserGroup="addUserGroup"
               />
               <v-btn
@@ -104,7 +105,6 @@ export default {
   name: 'defaultLayout',
   data() {
     return {
-      name: '',
       members: [],
       nameGroup: '',
       drawer: false,
@@ -128,11 +128,18 @@ export default {
       ],
     }
   },
+    created() {
+    this.$nuxt.$on('infoGroup', ({name, members}) => {
+      this.nameGroup = name
+      this.members = members;
+    })
+  },
   methods: {
     async logoutSesion() {
       await this.$auth.logout()
     },
     async addUserGroup(email) {
+      console.log(email)
       try {
         const user = await this.$axios.$put(`/api/group`, { email })
         this.members.unshift(user)

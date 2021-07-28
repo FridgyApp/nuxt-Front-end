@@ -35,9 +35,9 @@
                 label="Password"
                 required
                 :type="show1 ? 'text' : 'password'"
+                hint="At least 6 characters"
                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="show1 = !show1"
-                hint="At least 6 characters"
               ></v-text-field>
               <v-text-field
                 v-model="passwordRepeat"
@@ -45,11 +45,11 @@
                 solo
                 label="Confirm Password"
                 required
-                @keyup.enter="validate"
                 :type="show2 ? 'text' : 'password'"
-                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="show2 = !show2"
                 hint="At least 6 characters"
+                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                @keyup.enter="validate"
+                @click:append="show2 = !show2"
               ></v-text-field>
               <v-btn
                 :disabled="!valid"
@@ -116,13 +116,13 @@ export default {
             password: this.password,
             name: this.username,
           })
-          const res = await this.$auth.loginWith('local', {
+           await this.$auth.loginWith('local', {
             data: {
               email: this.email,
               password: this.password,
             },
           })
-          this.$auth.$storage.setUniversal('userId', res.data.uid)
+          
         } catch (error) {
           console.log('muy mal')
         }

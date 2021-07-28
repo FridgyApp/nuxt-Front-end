@@ -62,7 +62,6 @@
     }),
     methods: {
         addUserGroup() {
-          console.log(this.email)
             this.$emit('addUserGroup', this.email)
             this.dialog = false
             this.email = ''
