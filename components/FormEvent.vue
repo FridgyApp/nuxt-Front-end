@@ -1,10 +1,12 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px" transition="fab-transition">
     <template #activator="{ on, attrs }">
-      <v-btn class="mx-2" color="#333" dark v-bind="attrs" v-on="on">
+      
+      <v-btn class="rounded-pill" color="#333" dark v-bind="attrs" v-on="on" x-large>
         <v-icon>mdi-plus</v-icon>
         Add Event
       </v-btn>
+   
     </template>
     <v-card>
       <v-card-title>

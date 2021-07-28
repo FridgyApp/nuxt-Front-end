@@ -1,16 +1,11 @@
 <template>
-  <v-container>
+  <v-container class="calendar-wr" fill-height>
     <v-row>
-      <v-col cols="2">
-        <v-container fill-height>
-          <v-row>
-            <v-col cols="12">
-              <FormEvent @addEvent="addEvent" />
-            </v-col>
-          </v-row>
-        </v-container>
+      <v-col cols="12" class="d-flex justify-end">
+        <FormEvent @addEvent="addEvent" />
       </v-col>
-      <v-col cols="12" class="calendar-bg mt-5">
+
+      <v-col cols="12" class="calendar-bg">
         <Calendar
           @deleteEvent="deleteEvent"
           @editEvent="editEvent"
@@ -48,7 +43,7 @@ export default {
     async deleteEvent(id) {
       try {
         await this.$axios.$delete(`/api/events/${id}`)
-        
+
         this.types = this.types.filter((event) => event._id !== id)
         console.log(this.types)
       } catch (error) {
@@ -76,6 +71,9 @@ export default {
 
 <style scoped>
 .calendar-bg {
+  background-color: #ffba01;
+}
+.calendar-wr {
   background-color: #ffba01;
 }
 </style>

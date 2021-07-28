@@ -130,7 +130,9 @@ export default {
 #app {
   font-family: 'Dosis', sans-serif;
 }
-
+.bg-main{
+  background-color: #ffba01;
+}
 .white {
   color: #fff;
 }
