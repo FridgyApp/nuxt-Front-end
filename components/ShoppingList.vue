@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mx-auto scroll"
+    class="mx-auto"
     width="auto"
     max-width="800"
     max-height="550"
@@ -13,7 +13,7 @@
       <v-toolbar-title><b>SHOPPING LIST</b></v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <v-list>
+    <v-list class="scroll" min-height="580" max-height="580">
       <v-list-item v-for="(item, i) in listUpdate" :key="i">
         <v-list-item-content>
           <v-list-item-title v-text="item.productId.name"></v-list-item-title>
