@@ -14,8 +14,8 @@
                   <v-spacer></v-spacer>
                   <v-col cols="7" class="d-flex align-center">
                     <v-text-field
-                      dense
                       v-model="newProduct"
+                      dense
                       label="Products"
                       outlined
                       solo
@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       newProduct: '',
+      error : ''
     }
   },
   methods: {
@@ -75,12 +76,16 @@ export default {
         this.list = await this.$axios.$post('/api/shoppinglist', {
           productId: product,
         })
-      } catch (error) {}
+      } catch (error) {
+        this.error = error
+      }
     },
     async deleteItem(id) {
       try {
         this.list = await this.$axios.$delete(`/api/shoppingList/${id}`)
-      } catch (error) {}
+      } catch (error) {
+        this.error = error
+      }
     },
     async newProductList() {
       try {
@@ -89,13 +94,15 @@ export default {
         })
         this.products.push(newProduct)
       } catch (error) {
-        console.log(error.response.data.message)
+        this.error = error
       }
     },
     async editNoteProduct({ id, notes }) {
       try {
         await this.$axios.$put(`/api/shoppingList/${id}`, { notes })
-      } catch (error) {}
+      } catch (error) {
+        this.error = error
+      }
     },
   },
 }

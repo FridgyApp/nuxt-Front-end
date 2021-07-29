@@ -70,7 +70,6 @@
               :to="item.to"
               exact
               elevation="2"
-              color="transparent"
             >
               <v-list-item-icon>
                 <v-icon>{{ item.icon }}</v-icon>

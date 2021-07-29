@@ -18,6 +18,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      error: ''
+    }
+  },
   methods: {
     async createGroup(name) {
       try {
@@ -26,7 +31,7 @@ export default {
         this.$nuxt.refresh()
         location. reload()
       } catch (error) {
-        console.log('Can not create group')
+        this.error = error
       }
     },
   },

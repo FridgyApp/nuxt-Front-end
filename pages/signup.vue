@@ -92,6 +92,7 @@ export default {
     show1: false,
     show2: false,
     valid: true,
+    error: '',
     username: '',
     password: '',
     passwordRepeat: '',
@@ -124,7 +125,7 @@ export default {
           })
           
         } catch (error) {
-          console.log('muy mal')
+          this.error = error;
         }
       }
     },

@@ -7,9 +7,9 @@
 
       <v-col cols="12" class="calendar-bg">
         <Calendar
+          :types="types"
           @deleteEvent="deleteEvent"
           @editEvent="editEvent"
-          :types="types"
         />
       </v-col>
     </v-row>
@@ -31,6 +31,11 @@ export default {
       types,
     }
   },
+    data() {
+    return {
+      error: ''
+    }
+  },
   methods: {
     async addEvent(eventCalendar) {
       try {
@@ -38,7 +43,9 @@ export default {
         event.start = new Date(event.start).getTime()
         event.end = new Date(event.end).getTime()
         this.types.push(event)
-      } catch (error) {}
+      } catch (error) {
+        this.error = error
+      }
     },
     async deleteEvent(id) {
       try {
@@ -46,18 +53,16 @@ export default {
 
         this.types = this.types.filter((event) => event._id !== id)
       } catch (error) {
-        console.log(error)
+         this.error = error
       }
     },
     async editEvent({ id, ...event }) {
       try {
         const eventUpdate = await this.$axios.$put(`/api/events/${id}`, event)
-        console.log(eventUpdate, event)
         eventUpdate.start = new Date(event.start).getTime()
         eventUpdate.end = new Date(event.end).getTime()
         this.types = await this.types.map((ev) => {
           if (ev._id === eventUpdate._id) {
-            console.log('entre')
             return eventUpdate
           }
           return ev
