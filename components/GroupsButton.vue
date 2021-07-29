@@ -17,7 +17,7 @@
       </template>
       <v-list>
         <v-btn plain class="ml-2"> USERS IN GROUP </v-btn>
-        <v-list-item  v-for="(item, index) in items" :key="index" class="ml-5">
+        <v-list-item  v-for="(item, index) in members" :key="index" class="ml-5">
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
         <v-btn plain><FormAddUserGroup @addUserGroup="addUserGroup" /></v-btn>

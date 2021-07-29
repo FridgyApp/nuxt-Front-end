@@ -72,6 +72,7 @@ export default {
         stickyNotes: notes,
         events,
       } = await $axios.$get('/api/group')
+      console.log('members: ', name, members)
       if (name) {
         const types = events.map((event) => {
           return {
