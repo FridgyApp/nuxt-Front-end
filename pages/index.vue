@@ -95,7 +95,8 @@ export default {
         name,
         members,
       }
-    } catch (error) {}
+    } catch (error) {
+    }
   },
     data() {
     return {
@@ -110,7 +111,9 @@ export default {
     async editNoteProduct({ id, notes }) {
       try {
         await this.$axios.$put(`/api/shoppingList/${id}`, { notes })
-      } catch (error) {}
+      } catch (error) {
+        this.error = error
+      }
     },
 
 
@@ -138,7 +141,7 @@ export default {
       try {
         await this.$axios.$put(`/api/group`, { email })
       } catch (error) {
-        
+        this.error = error
       }
     },
         async deleteEvent(id) {

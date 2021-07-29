@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <v-menu offset-y transition="fab-transition">
-      <template v-slot:activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
         <v-btn
           class="navBar-Button mx-3 rounded-pill"
           color="#666"
@@ -17,7 +17,7 @@
       </template>
       <v-list>
         <v-btn plain class="ml-2"> USERS IN GROUP </v-btn>
-        <v-list-item class="ml-5" v-for="(item, index) in items" :key="index">
+        <v-list-item  v-for="(item, index) in items" :key="index" class="ml-5">
           <v-list-item-title>{{ item.name }}</v-list-item-title>
         </v-list-item>
         <v-btn plain><FormAddUserGroup @addUserGroup="addUserGroup" /></v-btn>

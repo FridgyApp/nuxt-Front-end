@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" persistent max-width="600px" transition="fab-transition">
     <template #activator="{ on, attrs }">
       
-      <v-btn class="rounded-pill" color="#333" dark v-bind="attrs" v-on="on" large>
+      <v-btn class="rounded-pill" color="#333" dark v-bind="attrs" large v-on="on" >
         <v-icon>mdi-plus</v-icon>
         Add Event
       </v-btn>
@@ -26,15 +26,6 @@
                 label="Description*"
                 required
               ></v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <v-select
-                v-model="color"
-                :items="items"
-                :menu-props="{ top: true, offsetY: true }"
-                label="Label"
-
-              ></v-select>
             </v-col>
             <v-col cols="6">
               <input v-model="start" type="datetime-local"  />
@@ -63,15 +54,6 @@ export default {
     dialog: false,
     name: '',
     description: '',
-    items: [
-      'blue',
-      'indigo',
-      'deep-purple',
-      'cyan',
-      'green',
-      'orange',
-      'grey darken-1',
-    ],
     color:'',
     start: '',
     end: '',

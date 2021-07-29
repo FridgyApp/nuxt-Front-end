@@ -45,7 +45,10 @@
 <script>
 export default {
   props: {
-    products: Array,
+    products: {
+      type: Array,
+      default: ()=>{ return [] }
+    },
   },
 
   data: () => ({

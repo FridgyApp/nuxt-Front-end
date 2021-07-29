@@ -69,7 +69,7 @@
                 <v-btn icon>
                   <v-icon @click="vista = !vista">mdi-pencil</v-icon>
                 </v-btn>
-                <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                <v-toolbar-title html="selectedEvent.name"></v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon @click="deleteEvent">
                   <v-icon>mdi-trash-can-outline</v-icon>
@@ -126,7 +126,10 @@
 <script>
 export default {
   props: {
-    types: Array,
+    types: {
+      type:Array,
+      default: ()=>{return []}
+    },
   },
   data: () => ({
     editDescription: '',
@@ -145,15 +148,6 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    colors: [
-      'blue',
-      'indigo',
-      'deep-purple',
-      'cyan',
-      'green',
-      'orange',
-      'grey darken-1',
-    ],
   }),
   methods: {
     viewDay({ date }) {
