@@ -10,7 +10,7 @@
               md="6"
               lg="3"
         
-              class="shoppingList-bg order-xs-2 order-sm-2 order-lg-0"
+              class="shoppingList-bg order-2 order-sm-2 order-lg-0"
             >
               <ShoppingList :list="list" @erase="deleteItem" @editNoteProduct="editNoteProduct" />
             </v-col>
@@ -19,7 +19,7 @@
               sm="12"
               md="12"
               lg="6"
-              class="calendar-bg order-xs-1 order-sm-3 order-lg-1"
+              class="calendar-bg order-1 order-sm-3 order-lg-1"
             >
               <Calendar
                 :types="types"
@@ -32,7 +32,7 @@
               sm="12"
               md="6"
               lg="3"
-              class="stickyNote-bg order-xs-0 order-sm-0 order-lg-2"
+              class="stickyNote-bg order-0 order-lg-2"
             >
               <v-container>
                 <v-row>

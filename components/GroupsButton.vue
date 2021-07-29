@@ -41,7 +41,6 @@ export default {
     if (!this.members) this.items = []
     else {
       this.items = this.members
-      this.items.push({ name: 'Add User in Group' })
     }
   },
   methods: {

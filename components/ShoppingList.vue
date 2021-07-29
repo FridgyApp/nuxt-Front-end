@@ -3,8 +3,8 @@
     class="mx-auto"
     width="auto"
     max-width="800"
-    max-height="550"
-    min-width="200"
+    max-height="650"
+    min-width="125"
     min-height="125"
     overflow-visible
   >
@@ -13,7 +13,7 @@
       <v-toolbar-title><b>SHOPPING LIST</b></v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <v-list class="scroll" min-height="125" max-height="550">
+    <v-list class="scroll" min-height="125" max-height="650">
       <v-list-item v-for="(item, i) in listUpdate" :key="i">
         <v-list-item-content>
           <v-list-item-title v-text="item.productId.name"></v-list-item-title>

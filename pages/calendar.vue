@@ -45,7 +45,6 @@ export default {
         await this.$axios.$delete(`/api/events/${id}`)
 
         this.types = this.types.filter((event) => event._id !== id)
-        console.log(this.types)
       } catch (error) {
         console.log(error)
       }

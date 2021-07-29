@@ -4,7 +4,7 @@
       <v-app-bar class="navBar" dark app>
         <v-container fluid>
           <v-row>
-            <v-col cols="4" class="d-flex align-center">
+            <v-col  xs="10" md="8" lg="4" class="d-flex align-center">
               <v-app-bar-nav-icon
                 class="d-md-none"
                 @click="drawer = true"
@@ -12,11 +12,15 @@
               <img src="../static/logo-blanco.png" width="180px" />
               <v-toolbar-title class="ml-8">{{ nameGroup }}</v-toolbar-title>
             </v-col>
-            <v-col v-if="Array.isArray(members)" cols="4" class="d-flex align-center d-xs-none d-md-flex" >
+            <v-col
+              v-if="Array.isArray(members)"
+              lg="4"
+              class="d-none d-lg-flex"
+            >
               <v-btn
                 v-for="(item, i) in items"
                 :key="i"
-                class="navBar-Button mx-3 rounded-pill d-sm-none d-md-flex"
+                class="navBar-Button mx-3 rounded-pill d-md-flex"
                 :to="item.to"
                 exact
                 elevation="2"
@@ -28,7 +32,7 @@
               </v-btn>
             </v-col>
             <v-spacer v-if="!Array.isArray(members)"></v-spacer>
-            <v-col cols="4" class="d-flex justify-end align-center">
+            <v-col lg="4" class="d-none d-md-flex justify-end">
               <GroupsButton
                 v-if="Array.isArray(members)"
                 :members="members"
@@ -128,13 +132,19 @@ export default {
       ],
     }
   },
-    created() {
-    this.$nuxt.$on('infoGroup', ({name, members}) => {
+  created() {
+    this.$nuxt.$on('infoGroup', ({ name, members }) => {
       this.nameGroup = name
-      this.members = members;
+      this.members = members
     })
   },
   methods: {
+    prueba() {
+      this.$nuxt.$on('infoGroup', ({ name, members }) => {
+        this.nameGroup = name
+        this.members = members
+      })
+    },
     async logoutSesion() {
       await this.$auth.logout()
     },
